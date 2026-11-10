@@ -1,0 +1,23 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+rootdir: D:\projects\CN Project\NetArchitect
+plugins: anyio-4.14.2
+collecting ... collected 1 item
+
+tests/test_ai_hallucination_defenses.py::test_ai_defense_case_3_fiber_optic_attenuation_limits FAILED [100%]
+
+================================== FAILURES ===================================
+_______ test_ai_defense_case_3_fiber_optic_attenuation_limits _______
+
+    def test_ai_defense_case_3_fiber_optic_attenuation_limits():
+        # Buggy AI code recommended 10GBASE-SR (OM4 MMF) for a 28 km link run
+        rec = select_optical_transceiver_naive(distance_km=28.0)
+        
+>       assert "OM4" not in rec["fiber"]
+E       AssertionError: assert 'OM4' not in 'OM4 Multimode Fiber'
+
+tests/test_ai_hallucination_defenses.py:79: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ai_hallucination_defenses.py::test_ai_defense_case_3_fiber_optic_attenuation_limits - AssertionError: assert 'OM4' not in 'OM4 Multimode Fiber'
+============================== 1 failed in 0.07s ==============================
+

@@ -1,0 +1,29 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+rootdir: D:\projects\CN Project\NetArchitect
+plugins: anyio-4.14.2
+collecting ... collected 1 item
+
+tests/test_ai_hallucination_defenses.py::test_ai_defense_case_1_canonical_network_alignment FAILED [100%]
+
+================================== FAILURES ===================================
+_________ test_ai_defense_case_1_canonical_network_alignment _________
+
+    def test_ai_defense_case_1_canonical_network_alignment():
+        # Buggy AI code passed raw interface IP into OSPF network statement
+        raw_input = "10.10.35.12/20"
+        ai_output = generate_ospf_network_statement_naive(raw_input, area=0)
+        # AI Output: " network 10.10.35.12 0.0.15.255 area 0"
+        
+        net_int = int(ipaddress.IPv4Address("10.10.35.12"))
+        wildcard_int = int(ipaddress.IPv4Address("0.0.15.255"))
+        
+>       assert (net_int & wildcard_int) == 0
+E       AssertionError: Security violation: Host bits leaked into canonical network address!
+E       assert (168436500 & 4095) == 780
+
+tests/test_ai_hallucination_defenses.py:34: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ai_hallucination_defenses.py::test_ai_defense_case_1_canonical_network_alignment - AssertionError: Security violation: Host bits leaked into canonical network address!
+============================== 1 failed in 0.08s ==============================
+

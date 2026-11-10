@@ -1,0 +1,23 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+rootdir: D:\projects\CN Project\NetArchitect
+plugins: anyio-4.14.2
+collecting ... collected 1 item
+
+tests/test_ai_hallucination_defenses.py::test_ai_defense_case_2_dtp_and_native_vlan_mitigation FAILED [100%]
+
+================================== FAILURES ===================================
+_______ test_ai_defense_case_2_dtp_and_native_vlan_mitigation _______
+
+    def test_ai_defense_case_2_dtp_and_native_vlan_mitigation():
+        # Buggy AI code omitted nonegotiate and retained default Native VLAN 1
+        cfg = generate_trunk_port_config_naive("GigabitEthernet0/1", [10, 20, 30])
+        
+>       assert "switchport nonegotiate" in cfg
+E       AssertionError: assert 'switchport nonegotiate' in 'interface GigabitEthernet0/1\n description UPLINK-TO-AGG-SWITCH\n switchport mode trunk\n switchport trunk allowed vlan 10,20,30\n'
+
+tests/test_ai_hallucination_defenses.py:58: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ai_hallucination_defenses.py::test_ai_defense_case_2_dtp_and_native_vlan_mitigation - AssertionError: assert 'switchport nonegotiate' in ...
+============================== 1 failed in 0.07s ==============================
+
