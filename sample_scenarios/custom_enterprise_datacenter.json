@@ -1,0 +1,68 @@
+{
+  "id": "custom-datacenter",
+  "name": "Custom Dual-Zone Enterprise Datacenter",
+  "description": "High-availability compute and database zone with remote disaster recovery link",
+  "root_network": "192.168.0.0/20",
+  "resiliency_mode": "DUAL_HOMED_RSTP",
+  "autonomous_system_number": 65150,
+  "links": [
+    {
+      "link_id": "LINK-INTERNAL-STORAGE-SAN",
+      "source": "DC-Core-Nexus-A",
+      "destination": "NVMe-Storage-Array",
+      "distance_meters": 45.0,
+      "bandwidth_gbps": 10.0,
+      "medium_preference": "AUTO",
+      "role": "Access"
+    },
+    {
+      "link_id": "LINK-INTER-SPINE-BACKBONE",
+      "source": "DC-Core-Nexus-A",
+      "destination": "DC-Core-Nexus-B",
+      "distance_meters": 220.0,
+      "bandwidth_gbps": 10.0,
+      "medium_preference": "AUTO",
+      "role": "Backbone"
+    },
+    {
+      "link_id": "LINK-METRO-DISASTER-RECOVERY",
+      "source": "DC-Core-Nexus-A",
+      "destination": "DR-Secondary-Site",
+      "distance_meters": 19500.0,
+      "bandwidth_gbps": 10.0,
+      "medium_preference": "FIBER",
+      "role": "Metro"
+    }
+  ],
+  "subnets": [
+    {
+      "name": "Kubernetes_Container_Workloads",
+      "required_hosts": 1500,
+      "vlan_id": 100,
+      "security_zone": "INTERNAL",
+      "description": "Container pods and microservices orchestration cluster"
+    },
+    {
+      "name": "Database_High_Availability_Cluster",
+      "required_hosts": 300,
+      "vlan_id": 110,
+      "security_zone": "INTERNAL",
+      "description": "PostgreSQL and Redis active-passive replication cluster"
+    },
+    {
+      "name": "Public_Ingress_DMZ_Reverse_Proxies",
+      "required_hosts": 80,
+      "vlan_id": 120,
+      "security_zone": "DMZ",
+      "description": "Public reverse proxies and API gateways"
+    },
+    {
+      "name": "Out_Of_Band_Management_IPMI",
+      "required_hosts": 40,
+      "vlan_id": 130,
+      "security_zone": "MANAGEMENT",
+      "description": "BMC, IPMI, and serial console servers"
+    }
+  ]
+}
+
