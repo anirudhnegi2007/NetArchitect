@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetArchitect — Network Planning & Config Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/dashboard.css?v=2">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+          </div>
+          <span class="brand-name">NetArchitect</span>
+          <span class="version-pill">v1.0</span>
+        </div>
+        <button class="mobile-menu-close" id="closeSidebarBtn" aria-label="Close navigation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Enterprise Profiles</div>
+        <nav class="preset-nav" id="presetNav">
+          <button class="nav-item active" data-id="campus-lan">
+            <div class="nav-item-main">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>Campus LAN</span>
+            </div>
+            <span class="nav-item-meta">1,600 nodes · OSPF Area 0</span>
+          </button>
+
+          <button class="nav-item" data-id="metro-man">
+            <div class="nav-item-main">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span>Metro MAN</span>
+            </div>
+            <span class="nav-item-meta">450 nodes · 15–35 km OS2</span>
+          </button>
+
+          <button class="nav-item" data-id="global-wan">
+            <div class="nav-item-main">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+              </svg>
+              <span>Global WAN</span>
+            </div>
+            <span class="nav-item-meta">2,000 IoT · eBGP + IPsec</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Custom Input</div>
+        <button class="nav-item nav-item-custom" id="openCustomTabBtn">
+          <div class="nav-item-main">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span>Scenario JSON Editor</span>
+          </div>
+          <span class="nav-item-meta">Test custom constraints</span>
+        </button>
+      </div>
+
+      <div class="sidebar-spacer"></div>
+
+      <!-- Quiet Telemetry Summary at bottom of sidebar -->
+      <div class="sidebar-summary">
+        <div class="summary-row">
+          <span class="summary-key">Root Prefix</span>
+          <span class="summary-val font-mono" id="sideRootNet">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-key">Packing Efficiency</span>
+          <span class="summary-val font-mono" id="sideEfficiency">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-key">Usable Endpoints</span>
+          <span class="summary-val font-mono" id="sideHosts">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-key">Autonomous System</span>
+          <span class="summary-val font-mono" id="sideAsn">—</span>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="/docs" target="_blank" class="footer-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          REST API Docs
+        </a>
+        <span class="status-dot-wrap">
+          <span class="status-dot"></span> Engine Ready
+        </span>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <div class="workspace">
+      <!-- Top Scenario Header & Tabs -->
+      <header class="workspace-header">
+        <div class="header-top">
+          <div class="title-group">
+            <button class="mobile-menu-btn" id="openSidebarBtn" aria-label="Open navigation">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <div>
+              <h1 class="scenario-title" id="scenarioTitle">Loading scenario...</h1>
+              <p class="scenario-subtitle" id="scenarioMeta">Resolving constraints and topological hierarchy</p>
+            </div>
+          </div>
+
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="quickCopyCfgBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy IOS Config</span>
+            </button>
+            <button class="btn btn-primary" id="quickDownloadCfgBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Export .cfg</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab Navigation Bar -->
+        <div class="tab-bar" role="tablist">
+          <button class="tab-btn active" data-tab="overview" role="tab">Overview & Rationale</button>
+          <button class="tab-btn" data-tab="subnets" role="tab">VLSM Subnets <span class="tab-count" id="tabSubnetCount">0</span></button>
+          <button class="tab-btn" data-tab="media" role="tab">Media Physics <span class="tab-count" id="tabLinkCount">0</span></button>
+          <button class="tab-btn" data-tab="cisco" role="tab">Cisco IOS Config</button>
+          <button class="tab-btn" data-tab="custom" role="tab">Custom Builder</button>
+        </div>
+      </header>
+
+      <!-- Workspace Scroll Container -->
+      <main class="workspace-content">
+        <!-- Boundary Error Alert (Hidden by default) -->
+        <div class="alert alert-error hidden" id="errorBanner" role="alert">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <div class="alert-body">
+            <strong id="errorTitle">Constraint Violation</strong>
+            <p id="errorMessage"></p>
+          </div>
+          <button class="alert-close" id="closeErrorBtn" aria-label="Dismiss alert">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+
+        <!-- TAB 1: OVERVIEW & RATIONALE -->
+        <section class="tab-pane active" id="pane-overview">
+          <div class="kpi-strip">
+            <div class="kpi-item">
+              <span class="kpi-label">Routing Architecture</span>
+              <span class="kpi-value" id="ovRoutingProto">—</span>
+              <span class="kpi-note" id="ovRfc">—</span>
+            </div>
+            <div class="kpi-item">
+              <span class="kpi-label">Convergence Profile</span>
+              <span class="kpi-value" id="ovConvergence">—</span>
+              <span class="kpi-note" id="ovTier">—</span>
+            </div>
+            <div class="kpi-item">
+              <span class="kpi-label">Address Space Utilization</span>
+              <span class="kpi-value font-mono" id="ovEfficiency">—</span>
+              <span class="kpi-note" id="ovTotalIps">—</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2>Explainable Architectural Rationales</h2>
+              <span class="badge">IEEE & RFC Verified</span>
+            </div>
+            <div class="rationale-grid" id="rationaleList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2>Routing Decision Breakdown</h2>
+            </div>
+            <div class="panel-body">
+              <p class="prose-text" id="routingRationaleText">—</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: VLSM SUBNETS -->
+        <section class="tab-pane" id="pane-subnets">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Bitwise VLSM Allocations</h2>
+                <p class="panel-sub">Sorted descending by host demand. Zero pairwise overlap mathematically verified.</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="downloadCsvBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download CSV
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table class="clean-table" id="vlsmTable">
+                <thead>
+                  <tr>
+                    <th>Subnet Name</th>
+                    <th>VLAN</th>
+                    <th>CIDR Prefix</th>
+                    <th>Default Gateway</th>
+                    <th>Usable Host Range</th>
+                    <th>Wildcard Mask</th>
+                    <th class="text-right">Efficiency</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: MEDIA PHYSICS -->
+        <section class="tab-pane" id="pane-media">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Layer 1 / Layer 2 Media & Optical Link Physics</h2>
+                <p class="panel-sub">Evaluated against IEEE 802.3an copper limits and IEEE 802.3ae dispersion budgets.</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="clean-table" id="mediaTable">
+                <thead>
+                  <tr>
+                    <th>Link ID</th>
+                    <th>Path</th>
+                    <th>Distance</th>
+                    <th>Selected Medium</th>
+                    <th>Standard</th>
+                    <th>Est. Loss</th>
+                    <th>Engineering Rationale</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: CISCO IOS CONFIG -->
+        <section class="tab-pane" id="pane-cisco">
+          <div class="panel config-panel">
+            <div class="panel-header">
+              <div class="device-filter-bar" id="deviceFilterBar">
+                <!-- Device filter pills injected dynamically -->
+              </div>
+              <div class="config-actions">
+                <button class="btn btn-secondary btn-sm" id="copyDeviceCfgBtn">Copy Current View</button>
+              </div>
+            </div>
+            <div class="code-viewer">
+              <pre><code id="ciscoConfigCode" class="font-mono">Loading Cisco IOS configuration...</code></pre>
+            </div>
+          </div>
+
+          <div class="verification-strip">
+            <span class="verify-label">Packet Tracer / GNS3 Checks:</span>
+            <code class="cmd-chip">show ip interface brief | include Vlan</code>
+            <code class="cmd-chip">show interfaces trunk</code>
+            <code class="cmd-chip">show spanning-tree summary</code>
+            <code class="cmd-chip">show ip ospf neighbor</code>
+          </div>
+        </section>
+
+        <!-- TAB 5: CUSTOM BUILDER (INLINE, NO MODAL) -->
+        <section class="tab-pane" id="pane-custom">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Custom Network Scenario Planner</h2>
+                <p class="panel-sub">Edit JSON parameters directly or load a template to test validation and boundary guards.</p>
+              </div>
+              <div class="quick-templates">
+                <button class="btn btn-secondary btn-sm" id="loadActivePresetBtn">Load Active Preset</button>
+                <button class="btn btn-secondary btn-sm" id="loadTemplateValidBtn">Valid Datacenter</button>
+                <button class="btn btn-secondary btn-sm" id="loadTemplateCopperErrBtn">Copper &gt;100m Error</button>
+                <button class="btn btn-secondary btn-sm" id="loadTemplateExhaustErrBtn">IP Exhaustion Error</button>
+                <button class="btn btn-secondary btn-sm" id="formatJsonBtn">Format JSON</button>
+              </div>
+            </div>
+            <div class="panel-body">
+              <textarea id="customJsonInput" class="json-editor font-mono" rows="18" spellcheck="false"></textarea>
+              <div class="editor-footer">
+                <span class="editor-hint" id="jsonSyntaxStatus">Valid JSON · Validates CIDR, distances, and VLANs</span>
+                <button class="btn btn-primary" id="executeCustomPlanBtn">Run Algorithmic Engine</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="/static/dashboard.js?v=2"></script>
+</body>
+</html>
