@@ -37,8 +37,16 @@ def test_access_switch_portfast_bpduguard_and_trunk_security():
 
     assert "switchport nonegotiate" in cfg
     assert "switchport trunk native vlan 999" in cfg
+    assert "switchport trunk encapsulation dot1q" not in cfg  # Catalyst 2960 compatibility
     assert "spanning-tree portfast" in cfg
     assert "spanning-tree bpduguard enable" in cfg
+
+    # Verify unified config uses valid IOS '!' comments and distinct OSPF router-ids
+    assert "########" not in plan.unified_cisco_config
+    core_sw = next(d for d in plan.device_configs if d.device_role == "Core-Switch").config_text
+    router = next(d for d in plan.device_configs if d.device_role == "Core-Router").config_text
+    assert "router-id 10.10.0.1" in core_sw
+    assert "router-id 198.51.100.1" in router
 
 
 def test_router_acl_and_wan_interface_emissions():

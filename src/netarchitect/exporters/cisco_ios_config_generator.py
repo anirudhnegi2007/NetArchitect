@@ -91,7 +91,6 @@ class CiscoIOSConfigSynthesizer:
         lines.extend([
             f"vlan {cls.NATIVE_QUARANTINE_VLAN}",
             " name QUARANTINE_NATIVE_VLAN",
-            " state suspend",
             " exit",
             "",
             "! --- SPANNING TREE PROTOCOL (IEEE 802.1w RAPID PVST+) ---",
@@ -194,16 +193,14 @@ class CiscoIOSConfigSynthesizer:
         lines.extend([
             f"vlan {cls.NATIVE_QUARANTINE_VLAN}",
             " name QUARANTINE_NATIVE_VLAN",
-            " state suspend",
             " exit",
             "",
             "! --- RAPID SPANNING TREE ---",
             "spanning-tree mode rapid-pvst",
             "",
-            "! --- HARDENED TRUNK TO CORE SWITCH ---",
+            "! --- HARDENED TRUNK TO CORE SWITCH (CATALYST 2960 COMPATIBLE) ---",
             "interface GigabitEthernet0/1",
             " description UPLINK-TO-CORE-DISTRIBUTION-SWITCH",
-            " switchport trunk encapsulation dot1q",
             " switchport mode trunk",
             " switchport nonegotiate",
             f" switchport trunk native vlan {cls.NATIVE_QUARANTINE_VLAN}",
@@ -245,7 +242,7 @@ class CiscoIOSConfigSynthesizer:
         root_net = ipaddress.IPv4Network(scenario.root_network, strict=False)
         lan_ip = allocations[0].last_usable_ip if allocations else str(root_net.network_address + 1)
         lan_mask = allocations[0].netmask if allocations else str(root_net.netmask)
-        ospf_router_id = allocations[0].default_gateway if allocations else "1.1.1.1"
+        ospf_router_id = "198.51.100.1"
 
         lines = [
             f"! ===========================================================================",
@@ -337,6 +334,6 @@ class CiscoIOSConfigSynthesizer:
         blocks = []
         for dev in device_configs:
             blocks.append(dev.config_text)
-            blocks.append("\n" + ("#" * 80) + "\n")
+            blocks.append("\n! " + ("=" * 78) + "\n")
         return "\n".join(blocks)
 
