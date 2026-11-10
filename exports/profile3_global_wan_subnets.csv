@@ -1,0 +1,6 @@
+Subnet Name,VLAN ID,Security Zone,Required Hosts,Allocated Hosts,CIDR Prefix,Network Address,Subnet Mask,Wildcard Mask,Default Gateway,First Usable IP,Last Usable IP,Broadcast Address,Allocation Efficiency %
+NYC_Logistics_Center_IoT,310,IOT,700,1022,10.200.0.0/22,10.200.0.0,255.255.252.0,0.0.3.255,10.200.0.1,10.200.0.2,10.200.3.254,10.200.3.255,68.49%
+London_Distribution_Scanners,320,IOT,450,510,10.200.4.0/23,10.200.4.0,255.255.254.0,0.0.1.255,10.200.4.1,10.200.4.2,10.200.5.254,10.200.5.255,88.24%
+Tokyo_Automated_Facility,330,IOT,400,510,10.200.6.0/23,10.200.6.0,255.255.254.0,0.0.1.255,10.200.6.1,10.200.6.2,10.200.7.254,10.200.7.255,78.43%
+Frankfurt_Regional_Hub,340,IOT,350,510,10.200.8.0/23,10.200.8.0,255.255.254.0,0.0.1.255,10.200.8.1,10.200.8.2,10.200.9.254,10.200.9.255,68.63%
+AWS_Cloud_Transit_VPC,350,DMZ,100,126,10.200.10.0/25,10.200.10.0,255.255.255.128,0.0.0.127,10.200.10.1,10.200.10.2,10.200.10.126,10.200.10.127,79.37%

@@ -1,0 +1,5 @@
+Subnet Name,VLAN ID,Security Zone,Required Hosts,Allocated Hosts,CIDR Prefix,Network Address,Subnet Mask,Wildcard Mask,Default Gateway,First Usable IP,Last Usable IP,Broadcast Address,Allocation Efficiency %
+Kubernetes_Container_Workloads,100,INTERNAL,1500,2046,192.168.0.0/21,192.168.0.0,255.255.248.0,0.0.7.255,192.168.0.1,192.168.0.2,192.168.7.254,192.168.7.255,73.31%
+Database_High_Availability_Cluster,110,INTERNAL,300,510,192.168.8.0/23,192.168.8.0,255.255.254.0,0.0.1.255,192.168.8.1,192.168.8.2,192.168.9.254,192.168.9.255,58.82%
+Public_Ingress_DMZ_Reverse_Proxies,120,DMZ,80,126,192.168.10.0/25,192.168.10.0,255.255.255.128,0.0.0.127,192.168.10.1,192.168.10.2,192.168.10.126,192.168.10.127,63.49%
+Out_Of_Band_Management_IPMI,130,MANAGEMENT,40,62,192.168.10.128/26,192.168.10.128,255.255.255.192,0.0.0.63,192.168.10.129,192.168.10.130,192.168.10.190,192.168.10.191,64.52%

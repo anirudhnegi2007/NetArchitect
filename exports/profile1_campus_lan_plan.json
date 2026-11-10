@@ -1,0 +1,204 @@
+{
+  "scenario_id": "campus-lan",
+  "scenario_name": "Profile 1: Enterprise Campus LAN",
+  "timestamp": "2026-11-10T15:52:57.343894+00:00",
+  "root_network": "10.10.0.0/16",
+  "total_available_ips": 65536,
+  "total_allocated_ips": 2368,
+  "total_usable_hosts": 2358,
+  "overall_efficiency_pct": 67.57,
+  "media_recommendations": [
+    {
+      "link_id": "LINK-HORIZ-BLDGA",
+      "source": "BldgA-IDFEAST",
+      "destination": "BldgA-PoE-APs",
+      "distance_meters": 65.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "Category 6a (Cat6a) F/UTP",
+      "standard": "10GBASE-T",
+      "wavelength_nm": 0,
+      "max_reach_meters": 100.0,
+      "attenuation_db_est": 2.73,
+      "rationale": "Recommended Cat6a (10GBASE-T) for 65.0m run. Within IEEE 802.3an 100m electrical transmission limit. Supports IEEE 802.3bt Type 4 Power over Ethernet (PoE++ up to 90W) for edge devices and APs without dedicated AC lines."
+    },
+    {
+      "link_id": "LINK-HORIZ-BLDGB",
+      "source": "BldgB-IDFWEST",
+      "destination": "BldgB-Endpoints",
+      "distance_meters": 85.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "Category 6a (Cat6a) F/UTP",
+      "standard": "10GBASE-T",
+      "wavelength_nm": 0,
+      "max_reach_meters": 100.0,
+      "attenuation_db_est": 3.57,
+      "rationale": "Recommended Cat6a (10GBASE-T) for 85.0m run. Within IEEE 802.3an 100m electrical transmission limit. Supports IEEE 802.3bt Type 4 Power over Ethernet (PoE++ up to 90W) for edge devices and APs without dedicated AC lines."
+    },
+    {
+      "link_id": "LINK-HORIZ-BLDGC",
+      "source": "BldgC-IDFRES",
+      "destination": "BldgC-DormAPs",
+      "distance_meters": 90.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "Category 6a (Cat6a) F/UTP",
+      "standard": "10GBASE-T",
+      "wavelength_nm": 0,
+      "max_reach_meters": 100.0,
+      "attenuation_db_est": 3.78,
+      "rationale": "Recommended Cat6a (10GBASE-T) for 90.0m run. Within IEEE 802.3an 100m electrical transmission limit. Supports IEEE 802.3bt Type 4 Power over Ethernet (PoE++ up to 90W) for edge devices and APs without dedicated AC lines."
+    },
+    {
+      "link_id": "LINK-BACKBONE-CORE-BLDGB",
+      "source": "Campus-MDF-Core",
+      "destination": "BldgB-Dist-Switch",
+      "distance_meters": 280.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "OM4 Laser-Optimized Multimode Fiber (50/125 um)",
+      "standard": "10GBASE-SR",
+      "wavelength_nm": 850,
+      "max_reach_meters": 400.0,
+      "attenuation_db_est": 1.44,
+      "rationale": "Selected OM4 Multimode Fiber (10GBASE-SR) because link distance (280.0m) exceeds copper 100m limit but operates within the 400m modal dispersion limit of OM4 850nm VCSEL optics (IEEE 802.3ae). Provides cost-effective campus backbone interconnections."
+    },
+    {
+      "link_id": "LINK-BACKBONE-CORE-BLDGC",
+      "source": "Campus-MDF-Core",
+      "destination": "BldgC-Dist-Switch",
+      "distance_meters": 375.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "OM4 Laser-Optimized Multimode Fiber (50/125 um)",
+      "standard": "10GBASE-SR",
+      "wavelength_nm": 850,
+      "max_reach_meters": 400.0,
+      "attenuation_db_est": 1.73,
+      "rationale": "Selected OM4 Multimode Fiber (10GBASE-SR) because link distance (375.0m) exceeds copper 100m limit but operates within the 400m modal dispersion limit of OM4 850nm VCSEL optics (IEEE 802.3ae). Provides cost-effective campus backbone interconnections."
+    }
+  ],
+  "subnet_allocations": [
+    {
+      "name": "Student_Residential_WiFi",
+      "vlan_id": 30,
+      "security_zone": "INTERNAL",
+      "required_hosts": 600,
+      "allocated_hosts": 1022,
+      "cidr": "10.10.0.0/22",
+      "network_address": "10.10.0.0",
+      "prefix_length": 22,
+      "netmask": "255.255.252.0",
+      "wildcard_mask": "0.0.3.255",
+      "default_gateway": "10.10.0.1",
+      "first_usable_ip": "10.10.0.2",
+      "last_usable_ip": "10.10.3.254",
+      "broadcast_address": "10.10.3.255",
+      "efficiency_pct": 58.71,
+      "rationale": "Allocated /22 (1024 total IPs, 1022 usable) for 600 required hosts. Efficiency: 58.71%. Wildcard mask 0.0.3.255 strictly bounded to boundary."
+    },
+    {
+      "name": "Academic_Labs_Workstations",
+      "vlan_id": 20,
+      "security_zone": "INTERNAL",
+      "required_hosts": 500,
+      "allocated_hosts": 510,
+      "cidr": "10.10.4.0/23",
+      "network_address": "10.10.4.0",
+      "prefix_length": 23,
+      "netmask": "255.255.254.0",
+      "wildcard_mask": "0.0.1.255",
+      "default_gateway": "10.10.4.1",
+      "first_usable_ip": "10.10.4.2",
+      "last_usable_ip": "10.10.5.254",
+      "broadcast_address": "10.10.5.255",
+      "efficiency_pct": 98.04,
+      "rationale": "Allocated /23 (512 total IPs, 510 usable) for 500 required hosts. Efficiency: 98.04%. Wildcard mask 0.0.1.255 strictly bounded to boundary."
+    },
+    {
+      "name": "Faculty_Administration",
+      "vlan_id": 10,
+      "security_zone": "MANAGEMENT",
+      "required_hosts": 300,
+      "allocated_hosts": 510,
+      "cidr": "10.10.6.0/23",
+      "network_address": "10.10.6.0",
+      "prefix_length": 23,
+      "netmask": "255.255.254.0",
+      "wildcard_mask": "0.0.1.255",
+      "default_gateway": "10.10.6.1",
+      "first_usable_ip": "10.10.6.2",
+      "last_usable_ip": "10.10.7.254",
+      "broadcast_address": "10.10.7.255",
+      "efficiency_pct": 58.82,
+      "rationale": "Allocated /23 (512 total IPs, 510 usable) for 300 required hosts. Efficiency: 58.82%. Wildcard mask 0.0.1.255 strictly bounded to boundary."
+    },
+    {
+      "name": "Campus_VoIP_Telephony",
+      "vlan_id": 40,
+      "security_zone": "VOIP",
+      "required_hosts": 150,
+      "allocated_hosts": 254,
+      "cidr": "10.10.8.0/24",
+      "network_address": "10.10.8.0",
+      "prefix_length": 24,
+      "netmask": "255.255.255.0",
+      "wildcard_mask": "0.0.0.255",
+      "default_gateway": "10.10.8.1",
+      "first_usable_ip": "10.10.8.2",
+      "last_usable_ip": "10.10.8.254",
+      "broadcast_address": "10.10.8.255",
+      "efficiency_pct": 59.06,
+      "rationale": "Allocated /24 (256 total IPs, 254 usable) for 150 required hosts. Efficiency: 59.06%. Wildcard mask 0.0.0.255 strictly bounded to boundary."
+    },
+    {
+      "name": "Facility_IoT_HVAC_Security",
+      "vlan_id": 50,
+      "security_zone": "IOT",
+      "required_hosts": 50,
+      "allocated_hosts": 62,
+      "cidr": "10.10.9.0/26",
+      "network_address": "10.10.9.0",
+      "prefix_length": 26,
+      "netmask": "255.255.255.192",
+      "wildcard_mask": "0.0.0.63",
+      "default_gateway": "10.10.9.1",
+      "first_usable_ip": "10.10.9.2",
+      "last_usable_ip": "10.10.9.62",
+      "broadcast_address": "10.10.9.63",
+      "efficiency_pct": 80.65,
+      "rationale": "Allocated /26 (64 total IPs, 62 usable) for 50 required hosts. Efficiency: 80.65%. Wildcard mask 0.0.0.63 strictly bounded to boundary."
+    }
+  ],
+  "routing_recommendation": {
+    "protocol": "OSPF Area 0 (Single Backbone Area)",
+    "autonomous_system": 65001,
+    "topology_tier": "Collapsed Core / Distribution Campus Hierarchy",
+    "summary_routes": [
+      "10.10.0.0/16"
+    ],
+    "convergence_profile": "Rapid Link-State SPF Recalculation (<200ms)",
+    "rationale": "Selected OSPF Area 0 because network scale (5 subnets, single Autonomous System) is well within the 50-subnet threshold for a single area. Eliminates ABR route summarization complexity while guaranteeing instant topological convergence via Dijkstra's Shortest Path First algorithm.",
+    "rfc_citation": "IETF RFC 2328 (OSPFv2)"
+  },
+  "device_configs": [
+    {
+      "hostname": "CAMPUS-LAN-CORE-SW01",
+      "device_role": "Core-Switch",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: CORE / DISTRIBUTION MULTILAYER SWITCH\n! Scenario: Profile 1: Enterprise Campus LAN\n! Hostname: CAMPUS-LAN-CORE-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CAMPUS-LAN-CORE-SW01\nno ip domain-lookup\nservice password-encryption\nip routing\n\n! --- VTP DOMAIN HARDENING ---\nvtp mode transparent\n\n! --- 802.1Q VLAN DATABASE DEFINITIONS ---\nvlan 30\n name Student_Residential_WiFi\n exit\nvlan 20\n name Academic_Labs_Workstations\n exit\nvlan 10\n name Faculty_Administration\n exit\nvlan 40\n name Campus_VoIP_Telephony\n exit\nvlan 50\n name Facility_IoT_HVAC_Security\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- SPANNING TREE PROTOCOL (IEEE 802.1w RAPID PVST+) ---\nspanning-tree mode rapid-pvst\nspanning-tree vlan 10,20,30,40,50 priority 4096\nspanning-tree portfast default\nspanning-tree portfast bpduguard default\n\n! --- HARDENED 802.1Q TRUNK UPLINKS (DTP DISABLED) ---\ninterface range GigabitEthernet0/1 - 2\n description UPLINK-TO-ACCESS-SWITCHES\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 10,20,30,40,50\n spanning-tree guard root\n no shutdown\n exit\n\n! --- SWITCHED VIRTUAL INTERFACES (SVIs) & GATEWAYS ---\ninterface Vlan30\n description SVI-GATEWAY-FOR-Student_Residential_WiFi\n ip address 10.10.0.1 255.255.252.0\n no shutdown\n exit\ninterface Vlan20\n description SVI-GATEWAY-FOR-Academic_Labs_Workstations\n ip address 10.10.4.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan10\n description SVI-GATEWAY-FOR-Faculty_Administration\n ip address 10.10.6.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan40\n description SVI-GATEWAY-FOR-Campus_VoIP_Telephony\n ip address 10.10.8.1 255.255.255.0\n no shutdown\n exit\ninterface Vlan50\n description SVI-GATEWAY-FOR-Facility_IoT_HVAC_Security\n ip address 10.10.9.1 255.255.255.192\n no shutdown\n exit\n\n! --- DYNAMIC ROUTING CONFIGURATION ---\nrouter ospf 1\n router-id 10.10.0.1\n passive-interface default\n no passive-interface Vlan30\n no passive-interface Vlan20\n no passive-interface Vlan10\n no passive-interface Vlan40\n no passive-interface Vlan50\n network 10.10.0.0 0.0.3.255 area 0\n network 10.10.4.0 0.0.1.255 area 0\n network 10.10.6.0 0.0.1.255 area 0\n network 10.10.8.0 0.0.0.255 area 0\n network 10.10.9.0 0.0.0.63 area 0\n exit\n\nend\nwrite memory\n"
+    },
+    {
+      "hostname": "CAMPUS-LAN-ACCESS-SW01",
+      "device_role": "Access-Switch",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: ACCESS LAYER SWITCH\n! Scenario: Profile 1: Enterprise Campus LAN\n! Hostname: CAMPUS-LAN-ACCESS-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CAMPUS-LAN-ACCESS-SW01\nno ip domain-lookup\nservice password-encryption\n\n! --- VTP TRANSPARENT MODE ---\nvtp mode transparent\n\n! --- VLAN DEFINITIONS ---\nvlan 30\n name Student_Residential_WiFi\n exit\nvlan 20\n name Academic_Labs_Workstations\n exit\nvlan 10\n name Faculty_Administration\n exit\nvlan 40\n name Campus_VoIP_Telephony\n exit\nvlan 50\n name Facility_IoT_HVAC_Security\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- RAPID SPANNING TREE ---\nspanning-tree mode rapid-pvst\n\n! --- HARDENED TRUNK TO CORE SWITCH ---\ninterface GigabitEthernet0/1\n description UPLINK-TO-CORE-DISTRIBUTION-SWITCH\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 10,20,30,40,50\n no shutdown\n exit\n\n! --- ACCESS EDGE PORTS (WITH PORTFAST & BPDU GUARD) ---\ninterface range FastEthernet0/1 - 24\n description ACCESS-ENDPOINTS-VLAN-30\n switchport mode access\n switchport access vlan 30\n spanning-tree portfast\n spanning-tree bpduguard enable\n no shutdown\n exit\n\nend\nwrite memory\n"
+    },
+    {
+      "hostname": "CAMPUS-LAN-BORDER-ROUTER01",
+      "device_role": "Core-Router",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: ENTERPRISE BORDER / CORE ROUTER\n! Scenario: Profile 1: Enterprise Campus LAN\n! Hostname: CAMPUS-LAN-BORDER-ROUTER01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CAMPUS-LAN-BORDER-ROUTER01\nno ip domain-lookup\nservice password-encryption\n\n! --- INTERFACE CONFIGURATION ---\ninterface GigabitEthernet0/0/0\n description LAN-INTERNAL-CORE-LINK\n ip address 10.10.3.254 255.255.252.0\n no shutdown\n exit\n\ninterface GigabitEthernet0/0/1\n description WAN-PUBLIC-UPLINK\n ip address 198.51.100.1 255.255.255.252\n no shutdown\n exit\n\n! --- HARDENED ROUTING ENGINE PROTOCOL ---\nrouter ospf 1\n router-id 10.10.0.1\n log-adjacency-changes\n network 10.10.0.0 0.0.3.255 area 0\n network 10.10.4.0 0.0.1.255 area 0\n network 10.10.6.0 0.0.1.255 area 0\n network 10.10.8.0 0.0.0.255 area 0\n network 10.10.9.0 0.0.0.63 area 0\n exit\n\n! --- ENTERPRISE DEFENSE ACCESS CONTROL LISTS (ACLs) ---\nip access-list extended ACL-ISOLATE-IOT-AND-GUEST\n remark Permit established return sessions\n permit tcp any any established\n remark Permit internal DNS and DHCP\n permit udp any any eq domain\n permit udp any any eq bootps\n permit udp any any eq bootpc\n remark Deny guest and IoT access to internal corporate subnets (RFC 1918)\n deny ip 10.0.0.0 0.255.255.255 10.10.10.0 0.0.0.255\n deny ip 172.16.0.0 0.15.255.255 172.16.199.0 0.0.0.255\n permit ip any any\n exit\n\nend\nwrite memory\n"
+    }
+  ],
+  "unified_cisco_config": "! ===========================================================================\n! CISCO IOS CONFIGURATION: CORE / DISTRIBUTION MULTILAYER SWITCH\n! Scenario: Profile 1: Enterprise Campus LAN\n! Hostname: CAMPUS-LAN-CORE-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CAMPUS-LAN-CORE-SW01\nno ip domain-lookup\nservice password-encryption\nip routing\n\n! --- VTP DOMAIN HARDENING ---\nvtp mode transparent\n\n! --- 802.1Q VLAN DATABASE DEFINITIONS ---\nvlan 30\n name Student_Residential_WiFi\n exit\nvlan 20\n name Academic_Labs_Workstations\n exit\nvlan 10\n name Faculty_Administration\n exit\nvlan 40\n name Campus_VoIP_Telephony\n exit\nvlan 50\n name Facility_IoT_HVAC_Security\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- SPANNING TREE PROTOCOL (IEEE 802.1w RAPID PVST+) ---\nspanning-tree mode rapid-pvst\nspanning-tree vlan 10,20,30,40,50 priority 4096\nspanning-tree portfast default\nspanning-tree portfast bpduguard default\n\n! --- HARDENED 802.1Q TRUNK UPLINKS (DTP DISABLED) ---\ninterface range GigabitEthernet0/1 - 2\n description UPLINK-TO-ACCESS-SWITCHES\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 10,20,30,40,50\n spanning-tree guard root\n no shutdown\n exit\n\n! --- SWITCHED VIRTUAL INTERFACES (SVIs) & GATEWAYS ---\ninterface Vlan30\n description SVI-GATEWAY-FOR-Student_Residential_WiFi\n ip address 10.10.0.1 255.255.252.0\n no shutdown\n exit\ninterface Vlan20\n description SVI-GATEWAY-FOR-Academic_Labs_Workstations\n ip address 10.10.4.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan10\n description SVI-GATEWAY-FOR-Faculty_Administration\n ip address 10.10.6.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan40\n description SVI-GATEWAY-FOR-Campus_VoIP_Telephony\n ip address 10.10.8.1 255.255.255.0\n no shutdown\n exit\ninterface Vlan50\n description SVI-GATEWAY-FOR-Facility_IoT_HVAC_Security\n ip address 10.10.9.1 255.255.255.192\n no shutdown\n exit\n\n! --- DYNAMIC ROUTING CONFIGURATION ---\nrouter ospf 1\n router-id 10.10.0.1\n passive-interface default\n no passive-interface Vlan30\n no passive-interface Vlan20\n no passive-interface Vlan10\n no passive-interface Vlan40\n no passive-interface Vlan50\n network 10.10.0.0 0.0.3.255 area 0\n network 10.10.4.0 0.0.1.255 area 0\n network 10.10.6.0 0.0.1.255 area 0\n network 10.10.8.0 0.0.0.255 area 0\n network 10.10.9.0 0.0.0.63 area 0\n exit\n\nend\nwrite memory\n\n\n################################################################################\n\n! ===========================================================================\n! CISCO IOS CONFIGURATION: ACCESS LAYER SWITCH\n! Scenario: Profile 1: Enterprise Campus LAN\n! Hostname: CAMPUS-LAN-ACCESS-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CAMPUS-LAN-ACCESS-SW01\nno ip domain-lookup\nservice password-encryption\n\n! --- VTP TRANSPARENT MODE ---\nvtp mode transparent\n\n! --- VLAN DEFINITIONS ---\nvlan 30\n name Student_Residential_WiFi\n exit\nvlan 20\n name Academic_Labs_Workstations\n exit\nvlan 10\n name Faculty_Administration\n exit\nvlan 40\n name Campus_VoIP_Telephony\n exit\nvlan 50\n name Facility_IoT_HVAC_Security\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- RAPID SPANNING TREE ---\nspanning-tree mode rapid-pvst\n\n! --- HARDENED TRUNK TO CORE SWITCH ---\ninterface GigabitEthernet0/1\n description UPLINK-TO-CORE-DISTRIBUTION-SWITCH\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 10,20,30,40,50\n no shutdown\n exit\n\n! --- ACCESS EDGE PORTS (WITH PORTFAST & BPDU GUARD) ---\ninterface range FastEthernet0/1 - 24\n description ACCESS-ENDPOINTS-VLAN-30\n switchport mode access\n switchport access vlan 30\n spanning-tree portfast\n spanning-tree bpduguard enable\n no shutdown\n exit\n\nend\nwrite memory\n\n\n################################################################################\n\n! ===========================================================================\n! CISCO IOS CONFIGURATION: ENTERPRISE BORDER / CORE ROUTER\n! Scenario: Profile 1: Enterprise Campus LAN\n! Hostname: CAMPUS-LAN-BORDER-ROUTER01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CAMPUS-LAN-BORDER-ROUTER01\nno ip domain-lookup\nservice password-encryption\n\n! --- INTERFACE CONFIGURATION ---\ninterface GigabitEthernet0/0/0\n description LAN-INTERNAL-CORE-LINK\n ip address 10.10.3.254 255.255.252.0\n no shutdown\n exit\n\ninterface GigabitEthernet0/0/1\n description WAN-PUBLIC-UPLINK\n ip address 198.51.100.1 255.255.255.252\n no shutdown\n exit\n\n! --- HARDENED ROUTING ENGINE PROTOCOL ---\nrouter ospf 1\n router-id 10.10.0.1\n log-adjacency-changes\n network 10.10.0.0 0.0.3.255 area 0\n network 10.10.4.0 0.0.1.255 area 0\n network 10.10.6.0 0.0.1.255 area 0\n network 10.10.8.0 0.0.0.255 area 0\n network 10.10.9.0 0.0.0.63 area 0\n exit\n\n! --- ENTERPRISE DEFENSE ACCESS CONTROL LISTS (ACLs) ---\nip access-list extended ACL-ISOLATE-IOT-AND-GUEST\n remark Permit established return sessions\n permit tcp any any established\n remark Permit internal DNS and DHCP\n permit udp any any eq domain\n permit udp any any eq bootps\n permit udp any any eq bootpc\n remark Deny guest and IoT access to internal corporate subnets (RFC 1918)\n deny ip 10.0.0.0 0.255.255.255 10.10.10.0 0.0.0.255\n deny ip 172.16.0.0 0.15.255.255 172.16.199.0 0.0.0.255\n permit ip any any\n exit\n\nend\nwrite memory\n\n\n################################################################################\n",
+  "executive_rationales": [
+    "Physical Media Strategy: Deployed Cat6a 10GBASE-T for horizontal runs <=100m (IEEE 802.3an), OM4 MMF 10GBASE-SR for intra-campus backbone runs <=400m (850nm dispersion limit). All link selections strictly adhere to IEEE 802.3 attenuation and transceiver optical budgets.",
+    "Layer 2 Resiliency: Enforced IEEE 802.1w Rapid Spanning Tree Protocol (Rapid PVST+). Provides sub-second failure recovery (<1s) via edge port fast transitions and direct proposal-agreement handshakes, eliminating legacy 802.1D 30-50s listening/learning delays.",
+    "Subnetting & Addressing: Implemented descending bitwise VLSM allocation within 10.10.0.0/16. Allocated 5 non-overlapping subnets (2368 total addresses reserved, 1600 active hosts) achieving 67.6% address space efficiency. All wildcard masks derived via bitwise unsigned negation.",
+    "Routing Architecture: OSPF Area 0 (Single Backbone Area). Selected OSPF Area 0 because network scale (5 subnets, single Autonomous System) is well within the 50-subnet threshold for a single area. Eliminates ABR route summarization complexity while guaranteeing instant topological convergence via Dijkstra's Shortest Path First algorithm. (Reference: IETF RFC 2328 (OSPFv2))."
+  ]
+}

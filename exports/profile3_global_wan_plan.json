@@ -1,0 +1,191 @@
+{
+  "scenario_id": "global-wan",
+  "scenario_name": "Profile 3: Global WAN (Multinational Logistics & Cloud VPC)",
+  "timestamp": "2026-11-10T15:53:00.858680+00:00",
+  "root_network": "10.200.0.0/14",
+  "total_available_ips": 262144,
+  "total_allocated_ips": 2688,
+  "total_usable_hosts": 2678,
+  "overall_efficiency_pct": 74.4,
+  "media_recommendations": [
+    {
+      "link_id": "LINK-WAN-NYC-CLOUD-DIRECT",
+      "source": "NYC-HQ-BorderRouter",
+      "destination": "AWS-DirectConnect-GW",
+      "distance_meters": 15000.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "OS2 Low-Water-Peak Single-Mode Fiber (9/125 um)",
+      "standard": "10GBASE-ER",
+      "wavelength_nm": 1550,
+      "max_reach_meters": 40000.0,
+      "attenuation_db_est": 4.95,
+      "rationale": "Selected OS2 Single-Mode Fiber (10GBASE-ER) because link distance (15.00 km) exceeds the 10 km reach of 10GBASE-LR. Utilizes 1550nm cooled EML laser operating in the minimum silica attenuation window (0.25 dB/km) with an optical power budget supporting up to 40 km metro MAN interconnects without mid-span amplification."
+    },
+    {
+      "link_id": "LINK-WAN-NYC-LONDON",
+      "source": "NYC-HQ-BorderRouter",
+      "destination": "London-Hub-Router",
+      "distance_meters": 5580000.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "OS2 Single-Mode Fiber with DWDM / EDFA",
+      "standard": "10GBASE-ZR / DWDM",
+      "wavelength_nm": 1550,
+      "max_reach_meters": 80000.0,
+      "attenuation_db_est": 1229.6,
+      "rationale": "Ultra-long-haul link (5580.00 km) exceeds 10GBASE-ER 40 km unamplified optical budget. Requires 1550nm DWDM transponders with Erbium-Doped Fiber Amplifiers (EDFA) and dispersion compensation modules."
+    },
+    {
+      "link_id": "LINK-WAN-NYC-FRANKFURT",
+      "source": "NYC-HQ-BorderRouter",
+      "destination": "Frankfurt-Hub-Router",
+      "distance_meters": 6200000.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "OS2 Single-Mode Fiber with DWDM / EDFA",
+      "standard": "10GBASE-ZR / DWDM",
+      "wavelength_nm": 1550,
+      "max_reach_meters": 80000.0,
+      "attenuation_db_est": 1366.0,
+      "rationale": "Ultra-long-haul link (6200.00 km) exceeds 10GBASE-ER 40 km unamplified optical budget. Requires 1550nm DWDM transponders with Erbium-Doped Fiber Amplifiers (EDFA) and dispersion compensation modules."
+    },
+    {
+      "link_id": "LINK-WAN-LONDON-TOKYO",
+      "source": "London-Hub-Router",
+      "destination": "Tokyo-Hub-Router",
+      "distance_meters": 9560000.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "OS2 Single-Mode Fiber with DWDM / EDFA",
+      "standard": "10GBASE-ZR / DWDM",
+      "wavelength_nm": 1550,
+      "max_reach_meters": 80000.0,
+      "attenuation_db_est": 2105.2,
+      "rationale": "Ultra-long-haul link (9560.00 km) exceeds 10GBASE-ER 40 km unamplified optical budget. Requires 1550nm DWDM transponders with Erbium-Doped Fiber Amplifiers (EDFA) and dispersion compensation modules."
+    }
+  ],
+  "subnet_allocations": [
+    {
+      "name": "NYC_Logistics_Center_IoT",
+      "vlan_id": 310,
+      "security_zone": "IOT",
+      "required_hosts": 700,
+      "allocated_hosts": 1022,
+      "cidr": "10.200.0.0/22",
+      "network_address": "10.200.0.0",
+      "prefix_length": 22,
+      "netmask": "255.255.252.0",
+      "wildcard_mask": "0.0.3.255",
+      "default_gateway": "10.200.0.1",
+      "first_usable_ip": "10.200.0.2",
+      "last_usable_ip": "10.200.3.254",
+      "broadcast_address": "10.200.3.255",
+      "efficiency_pct": 68.49,
+      "rationale": "Allocated /22 (1024 total IPs, 1022 usable) for 700 required hosts. Efficiency: 68.49%. Wildcard mask 0.0.3.255 strictly bounded to boundary."
+    },
+    {
+      "name": "London_Distribution_Scanners",
+      "vlan_id": 320,
+      "security_zone": "IOT",
+      "required_hosts": 450,
+      "allocated_hosts": 510,
+      "cidr": "10.200.4.0/23",
+      "network_address": "10.200.4.0",
+      "prefix_length": 23,
+      "netmask": "255.255.254.0",
+      "wildcard_mask": "0.0.1.255",
+      "default_gateway": "10.200.4.1",
+      "first_usable_ip": "10.200.4.2",
+      "last_usable_ip": "10.200.5.254",
+      "broadcast_address": "10.200.5.255",
+      "efficiency_pct": 88.24,
+      "rationale": "Allocated /23 (512 total IPs, 510 usable) for 450 required hosts. Efficiency: 88.24%. Wildcard mask 0.0.1.255 strictly bounded to boundary."
+    },
+    {
+      "name": "Tokyo_Automated_Facility",
+      "vlan_id": 330,
+      "security_zone": "IOT",
+      "required_hosts": 400,
+      "allocated_hosts": 510,
+      "cidr": "10.200.6.0/23",
+      "network_address": "10.200.6.0",
+      "prefix_length": 23,
+      "netmask": "255.255.254.0",
+      "wildcard_mask": "0.0.1.255",
+      "default_gateway": "10.200.6.1",
+      "first_usable_ip": "10.200.6.2",
+      "last_usable_ip": "10.200.7.254",
+      "broadcast_address": "10.200.7.255",
+      "efficiency_pct": 78.43,
+      "rationale": "Allocated /23 (512 total IPs, 510 usable) for 400 required hosts. Efficiency: 78.43%. Wildcard mask 0.0.1.255 strictly bounded to boundary."
+    },
+    {
+      "name": "Frankfurt_Regional_Hub",
+      "vlan_id": 340,
+      "security_zone": "IOT",
+      "required_hosts": 350,
+      "allocated_hosts": 510,
+      "cidr": "10.200.8.0/23",
+      "network_address": "10.200.8.0",
+      "prefix_length": 23,
+      "netmask": "255.255.254.0",
+      "wildcard_mask": "0.0.1.255",
+      "default_gateway": "10.200.8.1",
+      "first_usable_ip": "10.200.8.2",
+      "last_usable_ip": "10.200.9.254",
+      "broadcast_address": "10.200.9.255",
+      "efficiency_pct": 68.63,
+      "rationale": "Allocated /23 (512 total IPs, 510 usable) for 350 required hosts. Efficiency: 68.63%. Wildcard mask 0.0.1.255 strictly bounded to boundary."
+    },
+    {
+      "name": "AWS_Cloud_Transit_VPC",
+      "vlan_id": 350,
+      "security_zone": "DMZ",
+      "required_hosts": 100,
+      "allocated_hosts": 126,
+      "cidr": "10.200.10.0/25",
+      "network_address": "10.200.10.0",
+      "prefix_length": 25,
+      "netmask": "255.255.255.128",
+      "wildcard_mask": "0.0.0.127",
+      "default_gateway": "10.200.10.1",
+      "first_usable_ip": "10.200.10.2",
+      "last_usable_ip": "10.200.10.126",
+      "broadcast_address": "10.200.10.127",
+      "efficiency_pct": 79.37,
+      "rationale": "Allocated /25 (128 total IPs, 126 usable) for 100 required hosts. Efficiency: 79.37%. Wildcard mask 0.0.0.127 strictly bounded to boundary."
+    }
+  ],
+  "routing_recommendation": {
+    "protocol": "eBGP & Multi-Area OSPF",
+    "autonomous_system": 65003,
+    "topology_tier": "Multi-Area Core Backbone with Cloud Peering",
+    "summary_routes": [
+      "10.200.0.0/14"
+    ],
+    "convergence_profile": "Hierarchical SPF with BGP Path-Vector Policy Isolation",
+    "rationale": "Selected Multi-Area OSPF with eBGP peering to Autonomous System 65000. Multi-site and cloud VPC boundaries require BGP path-vector routing (RFC 4271) for policy-driven route filtering, while internal sites maintain hierarchical OSPF areas (Area 0 Core, Area 10/20 Branches) to prevent link-state flapping propagation.",
+    "rfc_citation": "IETF RFC 4271 (BGP-4) & RFC 2328 (OSPFv2)"
+  },
+  "device_configs": [
+    {
+      "hostname": "GLOBAL-WAN-CORE-SW01",
+      "device_role": "Core-Switch",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: CORE / DISTRIBUTION MULTILAYER SWITCH\n! Scenario: Profile 3: Global WAN (Multinational Logistics & Cloud VPC)\n! Hostname: GLOBAL-WAN-CORE-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname GLOBAL-WAN-CORE-SW01\nno ip domain-lookup\nservice password-encryption\nip routing\n\n! --- VTP DOMAIN HARDENING ---\nvtp mode transparent\n\n! --- 802.1Q VLAN DATABASE DEFINITIONS ---\nvlan 310\n name NYC_Logistics_Center_IoT\n exit\nvlan 320\n name London_Distribution_Scanners\n exit\nvlan 330\n name Tokyo_Automated_Facility\n exit\nvlan 340\n name Frankfurt_Regional_Hub\n exit\nvlan 350\n name AWS_Cloud_Transit_VPC\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- SPANNING TREE PROTOCOL (IEEE 802.1w RAPID PVST+) ---\nspanning-tree mode rapid-pvst\nspanning-tree vlan 310,320,330,340,350 priority 4096\nspanning-tree portfast default\nspanning-tree portfast bpduguard default\n\n! --- HARDENED 802.1Q TRUNK UPLINKS (DTP DISABLED) ---\ninterface range GigabitEthernet0/1 - 2\n description UPLINK-TO-ACCESS-SWITCHES\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 310,320,330,340,350\n spanning-tree guard root\n no shutdown\n exit\n\n! --- SWITCHED VIRTUAL INTERFACES (SVIs) & GATEWAYS ---\ninterface Vlan310\n description SVI-GATEWAY-FOR-NYC_Logistics_Center_IoT\n ip address 10.200.0.1 255.255.252.0\n no shutdown\n exit\ninterface Vlan320\n description SVI-GATEWAY-FOR-London_Distribution_Scanners\n ip address 10.200.4.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan330\n description SVI-GATEWAY-FOR-Tokyo_Automated_Facility\n ip address 10.200.6.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan340\n description SVI-GATEWAY-FOR-Frankfurt_Regional_Hub\n ip address 10.200.8.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan350\n description SVI-GATEWAY-FOR-AWS_Cloud_Transit_VPC\n ip address 10.200.10.1 255.255.255.128\n no shutdown\n exit\n\n! --- DYNAMIC ROUTING CONFIGURATION ---\nrouter ospf 1\n router-id 10.200.0.1\n passive-interface default\n no passive-interface Vlan310\n no passive-interface Vlan320\n no passive-interface Vlan330\n no passive-interface Vlan340\n no passive-interface Vlan350\n network 10.200.0.0 0.0.3.255 area 0\n network 10.200.4.0 0.0.1.255 area 0\n network 10.200.6.0 0.0.1.255 area 0\n network 10.200.8.0 0.0.1.255 area 0\n network 10.200.10.0 0.0.0.127 area 0\n exit\n\nend\nwrite memory\n"
+    },
+    {
+      "hostname": "GLOBAL-WAN-ACCESS-SW01",
+      "device_role": "Access-Switch",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: ACCESS LAYER SWITCH\n! Scenario: Profile 3: Global WAN (Multinational Logistics & Cloud VPC)\n! Hostname: GLOBAL-WAN-ACCESS-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname GLOBAL-WAN-ACCESS-SW01\nno ip domain-lookup\nservice password-encryption\n\n! --- VTP TRANSPARENT MODE ---\nvtp mode transparent\n\n! --- VLAN DEFINITIONS ---\nvlan 310\n name NYC_Logistics_Center_IoT\n exit\nvlan 320\n name London_Distribution_Scanners\n exit\nvlan 330\n name Tokyo_Automated_Facility\n exit\nvlan 340\n name Frankfurt_Regional_Hub\n exit\nvlan 350\n name AWS_Cloud_Transit_VPC\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- RAPID SPANNING TREE ---\nspanning-tree mode rapid-pvst\n\n! --- HARDENED TRUNK TO CORE SWITCH ---\ninterface GigabitEthernet0/1\n description UPLINK-TO-CORE-DISTRIBUTION-SWITCH\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 310,320,330,340,350\n no shutdown\n exit\n\n! --- ACCESS EDGE PORTS (WITH PORTFAST & BPDU GUARD) ---\ninterface range FastEthernet0/1 - 24\n description ACCESS-ENDPOINTS-VLAN-310\n switchport mode access\n switchport access vlan 310\n spanning-tree portfast\n spanning-tree bpduguard enable\n no shutdown\n exit\n\nend\nwrite memory\n"
+    },
+    {
+      "hostname": "GLOBAL-WAN-BORDER-ROUTER01",
+      "device_role": "Core-Router",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: ENTERPRISE BORDER / CORE ROUTER\n! Scenario: Profile 3: Global WAN (Multinational Logistics & Cloud VPC)\n! Hostname: GLOBAL-WAN-BORDER-ROUTER01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname GLOBAL-WAN-BORDER-ROUTER01\nno ip domain-lookup\nservice password-encryption\n\n! --- INTERFACE CONFIGURATION ---\ninterface GigabitEthernet0/0/0\n description LAN-INTERNAL-CORE-LINK\n ip address 10.200.3.254 255.255.252.0\n no shutdown\n exit\n\ninterface GigabitEthernet0/0/1\n description WAN-PUBLIC-UPLINK\n ip address 198.51.100.1 255.255.255.252\n no shutdown\n exit\n\n! --- HARDENED ROUTING ENGINE PROTOCOL ---\nrouter bgp 65003\n bgp router-id 198.51.100.1\n bgp log-neighbor-changes\n neighbor 198.51.100.2 remote-as 65000\n neighbor 198.51.100.2 description CLOUD-VPC-TRANSIT-GW\n network 10.200.0.0 mask 255.252.0.0\n exit\n\n! --- OSPF INTERNAL REDISTRIBUTION ---\nrouter ospf 1\n router-id 10.200.0.1\n network 10.200.0.0 0.0.3.255 area 0\n network 10.200.4.0 0.0.1.255 area 0\n network 10.200.6.0 0.0.1.255 area 0\n network 10.200.8.0 0.0.1.255 area 0\n network 10.200.10.0 0.0.0.127 area 0\n exit\n\n! --- ENTERPRISE DEFENSE ACCESS CONTROL LISTS (ACLs) ---\nip access-list extended ACL-ISOLATE-IOT-AND-GUEST\n remark Permit established return sessions\n permit tcp any any established\n remark Permit internal DNS and DHCP\n permit udp any any eq domain\n permit udp any any eq bootps\n permit udp any any eq bootpc\n remark Deny guest and IoT access to internal corporate subnets (RFC 1918)\n deny ip 10.0.0.0 0.255.255.255 10.10.10.0 0.0.0.255\n deny ip 172.16.0.0 0.15.255.255 172.16.199.0 0.0.0.255\n permit ip any any\n exit\n\nend\nwrite memory\n"
+    }
+  ],
+  "unified_cisco_config": "! ===========================================================================\n! CISCO IOS CONFIGURATION: CORE / DISTRIBUTION MULTILAYER SWITCH\n! Scenario: Profile 3: Global WAN (Multinational Logistics & Cloud VPC)\n! Hostname: GLOBAL-WAN-CORE-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname GLOBAL-WAN-CORE-SW01\nno ip domain-lookup\nservice password-encryption\nip routing\n\n! --- VTP DOMAIN HARDENING ---\nvtp mode transparent\n\n! --- 802.1Q VLAN DATABASE DEFINITIONS ---\nvlan 310\n name NYC_Logistics_Center_IoT\n exit\nvlan 320\n name London_Distribution_Scanners\n exit\nvlan 330\n name Tokyo_Automated_Facility\n exit\nvlan 340\n name Frankfurt_Regional_Hub\n exit\nvlan 350\n name AWS_Cloud_Transit_VPC\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- SPANNING TREE PROTOCOL (IEEE 802.1w RAPID PVST+) ---\nspanning-tree mode rapid-pvst\nspanning-tree vlan 310,320,330,340,350 priority 4096\nspanning-tree portfast default\nspanning-tree portfast bpduguard default\n\n! --- HARDENED 802.1Q TRUNK UPLINKS (DTP DISABLED) ---\ninterface range GigabitEthernet0/1 - 2\n description UPLINK-TO-ACCESS-SWITCHES\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 310,320,330,340,350\n spanning-tree guard root\n no shutdown\n exit\n\n! --- SWITCHED VIRTUAL INTERFACES (SVIs) & GATEWAYS ---\ninterface Vlan310\n description SVI-GATEWAY-FOR-NYC_Logistics_Center_IoT\n ip address 10.200.0.1 255.255.252.0\n no shutdown\n exit\ninterface Vlan320\n description SVI-GATEWAY-FOR-London_Distribution_Scanners\n ip address 10.200.4.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan330\n description SVI-GATEWAY-FOR-Tokyo_Automated_Facility\n ip address 10.200.6.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan340\n description SVI-GATEWAY-FOR-Frankfurt_Regional_Hub\n ip address 10.200.8.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan350\n description SVI-GATEWAY-FOR-AWS_Cloud_Transit_VPC\n ip address 10.200.10.1 255.255.255.128\n no shutdown\n exit\n\n! --- DYNAMIC ROUTING CONFIGURATION ---\nrouter ospf 1\n router-id 10.200.0.1\n passive-interface default\n no passive-interface Vlan310\n no passive-interface Vlan320\n no passive-interface Vlan330\n no passive-interface Vlan340\n no passive-interface Vlan350\n network 10.200.0.0 0.0.3.255 area 0\n network 10.200.4.0 0.0.1.255 area 0\n network 10.200.6.0 0.0.1.255 area 0\n network 10.200.8.0 0.0.1.255 area 0\n network 10.200.10.0 0.0.0.127 area 0\n exit\n\nend\nwrite memory\n\n\n################################################################################\n\n! ===========================================================================\n! CISCO IOS CONFIGURATION: ACCESS LAYER SWITCH\n! Scenario: Profile 3: Global WAN (Multinational Logistics & Cloud VPC)\n! Hostname: GLOBAL-WAN-ACCESS-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname GLOBAL-WAN-ACCESS-SW01\nno ip domain-lookup\nservice password-encryption\n\n! --- VTP TRANSPARENT MODE ---\nvtp mode transparent\n\n! --- VLAN DEFINITIONS ---\nvlan 310\n name NYC_Logistics_Center_IoT\n exit\nvlan 320\n name London_Distribution_Scanners\n exit\nvlan 330\n name Tokyo_Automated_Facility\n exit\nvlan 340\n name Frankfurt_Regional_Hub\n exit\nvlan 350\n name AWS_Cloud_Transit_VPC\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- RAPID SPANNING TREE ---\nspanning-tree mode rapid-pvst\n\n! --- HARDENED TRUNK TO CORE SWITCH ---\ninterface GigabitEthernet0/1\n description UPLINK-TO-CORE-DISTRIBUTION-SWITCH\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 310,320,330,340,350\n no shutdown\n exit\n\n! --- ACCESS EDGE PORTS (WITH PORTFAST & BPDU GUARD) ---\ninterface range FastEthernet0/1 - 24\n description ACCESS-ENDPOINTS-VLAN-310\n switchport mode access\n switchport access vlan 310\n spanning-tree portfast\n spanning-tree bpduguard enable\n no shutdown\n exit\n\nend\nwrite memory\n\n\n################################################################################\n\n! ===========================================================================\n! CISCO IOS CONFIGURATION: ENTERPRISE BORDER / CORE ROUTER\n! Scenario: Profile 3: Global WAN (Multinational Logistics & Cloud VPC)\n! Hostname: GLOBAL-WAN-BORDER-ROUTER01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname GLOBAL-WAN-BORDER-ROUTER01\nno ip domain-lookup\nservice password-encryption\n\n! --- INTERFACE CONFIGURATION ---\ninterface GigabitEthernet0/0/0\n description LAN-INTERNAL-CORE-LINK\n ip address 10.200.3.254 255.255.252.0\n no shutdown\n exit\n\ninterface GigabitEthernet0/0/1\n description WAN-PUBLIC-UPLINK\n ip address 198.51.100.1 255.255.255.252\n no shutdown\n exit\n\n! --- HARDENED ROUTING ENGINE PROTOCOL ---\nrouter bgp 65003\n bgp router-id 198.51.100.1\n bgp log-neighbor-changes\n neighbor 198.51.100.2 remote-as 65000\n neighbor 198.51.100.2 description CLOUD-VPC-TRANSIT-GW\n network 10.200.0.0 mask 255.252.0.0\n exit\n\n! --- OSPF INTERNAL REDISTRIBUTION ---\nrouter ospf 1\n router-id 10.200.0.1\n network 10.200.0.0 0.0.3.255 area 0\n network 10.200.4.0 0.0.1.255 area 0\n network 10.200.6.0 0.0.1.255 area 0\n network 10.200.8.0 0.0.1.255 area 0\n network 10.200.10.0 0.0.0.127 area 0\n exit\n\n! --- ENTERPRISE DEFENSE ACCESS CONTROL LISTS (ACLs) ---\nip access-list extended ACL-ISOLATE-IOT-AND-GUEST\n remark Permit established return sessions\n permit tcp any any established\n remark Permit internal DNS and DHCP\n permit udp any any eq domain\n permit udp any any eq bootps\n permit udp any any eq bootpc\n remark Deny guest and IoT access to internal corporate subnets (RFC 1918)\n deny ip 10.0.0.0 0.255.255.255 10.10.10.0 0.0.0.255\n deny ip 172.16.0.0 0.15.255.255 172.16.199.0 0.0.0.255\n permit ip any any\n exit\n\nend\nwrite memory\n\n\n################################################################################\n",
+  "executive_rationales": [
+    "Physical Media Strategy: Deployed OS2 SMF 10GBASE-LR/ER for long-span inter-building and MAN runs (zero modal dispersion). All link selections strictly adhere to IEEE 802.3 attenuation and transceiver optical budgets.",
+    "Layer 2/3 Resiliency: Dual-homed redundant gateways running HSRP/VRRP active-standby virtual routing, coupled with IPsec VPN tunnel failover across secondary WAN uplinks.",
+    "Subnetting & Addressing: Implemented descending bitwise VLSM allocation within 10.200.0.0/14. Allocated 5 non-overlapping subnets (2688 total addresses reserved, 2000 active hosts) achieving 74.4% address space efficiency. All wildcard masks derived via bitwise unsigned negation.",
+    "Routing Architecture: eBGP & Multi-Area OSPF. Selected Multi-Area OSPF with eBGP peering to Autonomous System 65000. Multi-site and cloud VPC boundaries require BGP path-vector routing (RFC 4271) for policy-driven route filtering, while internal sites maintain hierarchical OSPF areas (Area 0 Core, Area 10/20 Branches) to prevent link-state flapping propagation. (Reference: IETF RFC 4271 (BGP-4) & RFC 2328 (OSPFv2))."
+  ]
+}

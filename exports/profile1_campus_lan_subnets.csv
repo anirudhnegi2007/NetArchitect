@@ -1,0 +1,6 @@
+Subnet Name,VLAN ID,Security Zone,Required Hosts,Allocated Hosts,CIDR Prefix,Network Address,Subnet Mask,Wildcard Mask,Default Gateway,First Usable IP,Last Usable IP,Broadcast Address,Allocation Efficiency %
+Student_Residential_WiFi,30,INTERNAL,600,1022,10.10.0.0/22,10.10.0.0,255.255.252.0,0.0.3.255,10.10.0.1,10.10.0.2,10.10.3.254,10.10.3.255,58.71%
+Academic_Labs_Workstations,20,INTERNAL,500,510,10.10.4.0/23,10.10.4.0,255.255.254.0,0.0.1.255,10.10.4.1,10.10.4.2,10.10.5.254,10.10.5.255,98.04%
+Faculty_Administration,10,MANAGEMENT,300,510,10.10.6.0/23,10.10.6.0,255.255.254.0,0.0.1.255,10.10.6.1,10.10.6.2,10.10.7.254,10.10.7.255,58.82%
+Campus_VoIP_Telephony,40,VOIP,150,254,10.10.8.0/24,10.10.8.0,255.255.255.0,0.0.0.255,10.10.8.1,10.10.8.2,10.10.8.254,10.10.8.255,59.06%
+Facility_IoT_HVAC_Security,50,IOT,50,62,10.10.9.0/26,10.10.9.0,255.255.255.192,0.0.0.63,10.10.9.1,10.10.9.2,10.10.9.62,10.10.9.63,80.65%

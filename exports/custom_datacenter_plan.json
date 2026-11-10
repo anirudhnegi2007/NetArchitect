@@ -1,0 +1,160 @@
+{
+  "scenario_id": "custom-datacenter",
+  "scenario_name": "Custom Dual-Zone Enterprise Datacenter",
+  "timestamp": "2026-11-10T15:46:53.156512+00:00",
+  "root_network": "192.168.0.0/20",
+  "total_available_ips": 4096,
+  "total_allocated_ips": 2752,
+  "total_usable_hosts": 2744,
+  "overall_efficiency_pct": 69.77,
+  "media_recommendations": [
+    {
+      "link_id": "LINK-INTERNAL-STORAGE-SAN",
+      "source": "DC-Core-Nexus-A",
+      "destination": "NVMe-Storage-Array",
+      "distance_meters": 45.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "Category 6a (Cat6a) F/UTP",
+      "standard": "10GBASE-T",
+      "wavelength_nm": 0,
+      "max_reach_meters": 100.0,
+      "attenuation_db_est": 1.89,
+      "rationale": "Selected Cat6a (10GBASE-T) because link distance (45.0m) is within the 100m horizontal cabling limit (IEEE 802.3an). Enables PoE++ power delivery and cost-effective RJ-45 termination for edge switches."
+    },
+    {
+      "link_id": "LINK-INTER-SPINE-BACKBONE",
+      "source": "DC-Core-Nexus-A",
+      "destination": "DC-Core-Nexus-B",
+      "distance_meters": 220.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "OM4 Laser-Optimized Multimode Fiber (50/125 um)",
+      "standard": "10GBASE-SR",
+      "wavelength_nm": 850,
+      "max_reach_meters": 400.0,
+      "attenuation_db_est": 1.26,
+      "rationale": "Selected OM4 Multimode Fiber (10GBASE-SR) because link distance (220.0m) exceeds copper 100m limit but operates within the 400m modal dispersion limit of OM4 850nm VCSEL optics (IEEE 802.3ae). Provides cost-effective campus backbone interconnections."
+    },
+    {
+      "link_id": "LINK-METRO-DISASTER-RECOVERY",
+      "source": "DC-Core-Nexus-A",
+      "destination": "DR-Secondary-Site",
+      "distance_meters": 19500.0,
+      "bandwidth_gbps": 10.0,
+      "medium_type": "OS2 Low-Water-Peak Single-Mode Fiber (9/125 um)",
+      "standard": "10GBASE-ER",
+      "wavelength_nm": 1550,
+      "max_reach_meters": 40000.0,
+      "attenuation_db_est": 6.08,
+      "rationale": "Selected OS2 Single-Mode Fiber (10GBASE-ER) because link distance (19.50 km) exceeds the 10 km reach of 10GBASE-LR. Utilizes 1550nm cooled EML laser operating in the minimum silica attenuation window (0.25 dB/km) with an optical power budget supporting up to 40 km metro MAN interconnects without mid-span amplification."
+    }
+  ],
+  "subnet_allocations": [
+    {
+      "name": "Kubernetes_Container_Workloads",
+      "vlan_id": 100,
+      "security_zone": "INTERNAL",
+      "required_hosts": 1500,
+      "allocated_hosts": 2046,
+      "cidr": "192.168.0.0/21",
+      "network_address": "192.168.0.0",
+      "prefix_length": 21,
+      "netmask": "255.255.248.0",
+      "wildcard_mask": "0.0.7.255",
+      "default_gateway": "192.168.0.1",
+      "first_usable_ip": "192.168.0.2",
+      "last_usable_ip": "192.168.7.254",
+      "broadcast_address": "192.168.7.255",
+      "efficiency_pct": 73.31,
+      "rationale": "Allocated /21 (2048 total IPs, 2046 usable) for 1500 required hosts. Efficiency: 73.31%. Wildcard mask 0.0.7.255 strictly bounded to boundary."
+    },
+    {
+      "name": "Database_High_Availability_Cluster",
+      "vlan_id": 110,
+      "security_zone": "INTERNAL",
+      "required_hosts": 300,
+      "allocated_hosts": 510,
+      "cidr": "192.168.8.0/23",
+      "network_address": "192.168.8.0",
+      "prefix_length": 23,
+      "netmask": "255.255.254.0",
+      "wildcard_mask": "0.0.1.255",
+      "default_gateway": "192.168.8.1",
+      "first_usable_ip": "192.168.8.2",
+      "last_usable_ip": "192.168.9.254",
+      "broadcast_address": "192.168.9.255",
+      "efficiency_pct": 58.82,
+      "rationale": "Allocated /23 (512 total IPs, 510 usable) for 300 required hosts. Efficiency: 58.82%. Wildcard mask 0.0.1.255 strictly bounded to boundary."
+    },
+    {
+      "name": "Public_Ingress_DMZ_Reverse_Proxies",
+      "vlan_id": 120,
+      "security_zone": "DMZ",
+      "required_hosts": 80,
+      "allocated_hosts": 126,
+      "cidr": "192.168.10.0/25",
+      "network_address": "192.168.10.0",
+      "prefix_length": 25,
+      "netmask": "255.255.255.128",
+      "wildcard_mask": "0.0.0.127",
+      "default_gateway": "192.168.10.1",
+      "first_usable_ip": "192.168.10.2",
+      "last_usable_ip": "192.168.10.126",
+      "broadcast_address": "192.168.10.127",
+      "efficiency_pct": 63.49,
+      "rationale": "Allocated /25 (128 total IPs, 126 usable) for 80 required hosts. Efficiency: 63.49%. Wildcard mask 0.0.0.127 strictly bounded to boundary."
+    },
+    {
+      "name": "Out_Of_Band_Management_IPMI",
+      "vlan_id": 130,
+      "security_zone": "MANAGEMENT",
+      "required_hosts": 40,
+      "allocated_hosts": 62,
+      "cidr": "192.168.10.128/26",
+      "network_address": "192.168.10.128",
+      "prefix_length": 26,
+      "netmask": "255.255.255.192",
+      "wildcard_mask": "0.0.0.63",
+      "default_gateway": "192.168.10.129",
+      "first_usable_ip": "192.168.10.130",
+      "last_usable_ip": "192.168.10.190",
+      "broadcast_address": "192.168.10.191",
+      "efficiency_pct": 64.52,
+      "rationale": "Allocated /26 (64 total IPs, 62 usable) for 40 required hosts. Efficiency: 64.52%. Wildcard mask 0.0.0.63 strictly bounded to boundary."
+    }
+  ],
+  "routing_recommendation": {
+    "protocol": "OSPF Area 0 (Single Backbone Area)",
+    "autonomous_system": 65150,
+    "topology_tier": "Collapsed Core / Distribution Campus Hierarchy",
+    "summary_routes": [
+      "192.168.0.0/20"
+    ],
+    "convergence_profile": "Rapid Link-State SPF Recalculation (<200ms)",
+    "rationale": "Selected OSPF Area 0 because network scale (4 subnets, single Autonomous System) is well within the 50-subnet threshold for a single area. Eliminates ABR route summarization complexity while guaranteeing instant topological convergence via Dijkstra's Shortest Path First algorithm.",
+    "rfc_citation": "IETF RFC 2328 (OSPFv2)"
+  },
+  "device_configs": [
+    {
+      "hostname": "CUSTOM-DATACENTER-CORE-SW01",
+      "device_role": "Core-Switch",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: CORE / DISTRIBUTION MULTILAYER SWITCH\n! Scenario: Custom Dual-Zone Enterprise Datacenter\n! Hostname: CUSTOM-DATACENTER-CORE-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CUSTOM-DATACENTER-CORE-SW01\nno ip domain-lookup\nservice password-encryption\nip routing\n\n! --- VTP DOMAIN HARDENING ---\nvtp mode transparent\n\n! --- 802.1Q VLAN DATABASE DEFINITIONS ---\nvlan 100\n name Kubernetes_Container_Workloads\n exit\nvlan 110\n name Database_High_Availability_Clust\n exit\nvlan 120\n name Public_Ingress_DMZ_Reverse_Proxi\n exit\nvlan 130\n name Out_Of_Band_Management_IPMI\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- SPANNING TREE PROTOCOL (IEEE 802.1w RAPID PVST+) ---\nspanning-tree mode rapid-pvst\nspanning-tree vlan 100,110,120,130 priority 4096\nspanning-tree portfast default\nspanning-tree portfast bpduguard default\n\n! --- HARDENED 802.1Q TRUNK UPLINKS (DTP DISABLED) ---\ninterface range GigabitEthernet0/1 - 2\n description UPLINK-TO-ACCESS-SWITCHES\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 100,110,120,130\n spanning-tree guard root\n no shutdown\n exit\n\n! --- SWITCHED VIRTUAL INTERFACES (SVIs) & GATEWAYS ---\ninterface Vlan100\n description SVI-GATEWAY-FOR-Kubernetes_Container_Workloads\n ip address 192.168.0.1 255.255.248.0\n no shutdown\n exit\ninterface Vlan110\n description SVI-GATEWAY-FOR-Database_High_Availability_Cluster\n ip address 192.168.8.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan120\n description SVI-GATEWAY-FOR-Public_Ingress_DMZ_Reverse_Proxies\n ip address 192.168.10.1 255.255.255.128\n no shutdown\n exit\ninterface Vlan130\n description SVI-GATEWAY-FOR-Out_Of_Band_Management_IPMI\n ip address 192.168.10.129 255.255.255.192\n no shutdown\n exit\n\n! --- DYNAMIC ROUTING CONFIGURATION ---\nrouter ospf 1\n router-id 192.168.0.1\n passive-interface default\n no passive-interface Vlan100\n no passive-interface Vlan110\n no passive-interface Vlan120\n no passive-interface Vlan130\n network 192.168.0.0 0.0.7.255 area 0\n network 192.168.8.0 0.0.1.255 area 0\n network 192.168.10.0 0.0.0.127 area 0\n network 192.168.10.128 0.0.0.63 area 0\n exit\n\nend\nwrite memory\n"
+    },
+    {
+      "hostname": "CUSTOM-DATACENTER-ACCESS-SW01",
+      "device_role": "Access-Switch",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: ACCESS LAYER SWITCH\n! Scenario: Custom Dual-Zone Enterprise Datacenter\n! Hostname: CUSTOM-DATACENTER-ACCESS-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CUSTOM-DATACENTER-ACCESS-SW01\nno ip domain-lookup\nservice password-encryption\n\n! --- VTP TRANSPARENT MODE ---\nvtp mode transparent\n\n! --- VLAN DEFINITIONS ---\nvlan 100\n name Kubernetes_Container_Workloads\n exit\nvlan 110\n name Database_High_Availability_Clust\n exit\nvlan 120\n name Public_Ingress_DMZ_Reverse_Proxi\n exit\nvlan 130\n name Out_Of_Band_Management_IPMI\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- RAPID SPANNING TREE ---\nspanning-tree mode rapid-pvst\n\n! --- HARDENED TRUNK TO CORE SWITCH ---\ninterface GigabitEthernet0/1\n description UPLINK-TO-CORE-DISTRIBUTION-SWITCH\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 100,110,120,130\n no shutdown\n exit\n\n! --- ACCESS EDGE PORTS (WITH PORTFAST & BPDU GUARD) ---\ninterface range FastEthernet0/1 - 24\n description ACCESS-ENDPOINTS-VLAN-100\n switchport mode access\n switchport access vlan 100\n spanning-tree portfast\n spanning-tree bpduguard enable\n no shutdown\n exit\n\nend\nwrite memory\n"
+    },
+    {
+      "hostname": "CUSTOM-DATACENTER-BORDER-ROUTER01",
+      "device_role": "Core-Router",
+      "config_text": "! ===========================================================================\n! CISCO IOS CONFIGURATION: ENTERPRISE BORDER / CORE ROUTER\n! Scenario: Custom Dual-Zone Enterprise Datacenter\n! Hostname: CUSTOM-DATACENTER-BORDER-ROUTER01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CUSTOM-DATACENTER-BORDER-ROUTER01\nno ip domain-lookup\nservice password-encryption\n\n! --- INTERFACE CONFIGURATION ---\ninterface GigabitEthernet0/0/0\n description LAN-INTERNAL-CORE-LINK\n ip address 192.168.0.254 255.255.255.0\n no shutdown\n exit\n\ninterface GigabitEthernet0/0/1\n description WAN-PUBLIC-UPLINK\n ip address 198.51.100.1 255.255.255.252\n no shutdown\n exit\n\n! --- HARDENED ROUTING ENGINE PROTOCOL ---\nrouter ospf 1\n router-id 192.168.0.1\n log-adjacency-changes\n network 192.168.0.0 0.0.7.255 area 0\n network 192.168.8.0 0.0.1.255 area 0\n network 192.168.10.0 0.0.0.127 area 0\n network 192.168.10.128 0.0.0.63 area 0\n exit\n\n! --- ENTERPRISE DEFENSE ACCESS CONTROL LISTS (ACLs) ---\nip access-list extended ACL-ISOLATE-IOT-AND-GUEST\n remark Permit established return sessions\n permit tcp any any established\n remark Permit internal DNS and DHCP\n permit udp any any eq domain\n permit udp any any eq bootps\n permit udp any any eq bootpc\n remark Deny guest and IoT access to internal corporate subnets (RFC 1918)\n deny ip 10.0.0.0 0.255.255.255 10.10.10.0 0.0.0.255\n deny ip 172.16.0.0 0.15.255.255 172.16.199.0 0.0.0.255\n permit ip any any\n exit\n\nend\nwrite memory\n"
+    }
+  ],
+  "unified_cisco_config": "! ===========================================================================\n! CISCO IOS CONFIGURATION: CORE / DISTRIBUTION MULTILAYER SWITCH\n! Scenario: Custom Dual-Zone Enterprise Datacenter\n! Hostname: CUSTOM-DATACENTER-CORE-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CUSTOM-DATACENTER-CORE-SW01\nno ip domain-lookup\nservice password-encryption\nip routing\n\n! --- VTP DOMAIN HARDENING ---\nvtp mode transparent\n\n! --- 802.1Q VLAN DATABASE DEFINITIONS ---\nvlan 100\n name Kubernetes_Container_Workloads\n exit\nvlan 110\n name Database_High_Availability_Clust\n exit\nvlan 120\n name Public_Ingress_DMZ_Reverse_Proxi\n exit\nvlan 130\n name Out_Of_Band_Management_IPMI\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- SPANNING TREE PROTOCOL (IEEE 802.1w RAPID PVST+) ---\nspanning-tree mode rapid-pvst\nspanning-tree vlan 100,110,120,130 priority 4096\nspanning-tree portfast default\nspanning-tree portfast bpduguard default\n\n! --- HARDENED 802.1Q TRUNK UPLINKS (DTP DISABLED) ---\ninterface range GigabitEthernet0/1 - 2\n description UPLINK-TO-ACCESS-SWITCHES\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 100,110,120,130\n spanning-tree guard root\n no shutdown\n exit\n\n! --- SWITCHED VIRTUAL INTERFACES (SVIs) & GATEWAYS ---\ninterface Vlan100\n description SVI-GATEWAY-FOR-Kubernetes_Container_Workloads\n ip address 192.168.0.1 255.255.248.0\n no shutdown\n exit\ninterface Vlan110\n description SVI-GATEWAY-FOR-Database_High_Availability_Cluster\n ip address 192.168.8.1 255.255.254.0\n no shutdown\n exit\ninterface Vlan120\n description SVI-GATEWAY-FOR-Public_Ingress_DMZ_Reverse_Proxies\n ip address 192.168.10.1 255.255.255.128\n no shutdown\n exit\ninterface Vlan130\n description SVI-GATEWAY-FOR-Out_Of_Band_Management_IPMI\n ip address 192.168.10.129 255.255.255.192\n no shutdown\n exit\n\n! --- DYNAMIC ROUTING CONFIGURATION ---\nrouter ospf 1\n router-id 192.168.0.1\n passive-interface default\n no passive-interface Vlan100\n no passive-interface Vlan110\n no passive-interface Vlan120\n no passive-interface Vlan130\n network 192.168.0.0 0.0.7.255 area 0\n network 192.168.8.0 0.0.1.255 area 0\n network 192.168.10.0 0.0.0.127 area 0\n network 192.168.10.128 0.0.0.63 area 0\n exit\n\nend\nwrite memory\n\n\n################################################################################\n\n! ===========================================================================\n! CISCO IOS CONFIGURATION: ACCESS LAYER SWITCH\n! Scenario: Custom Dual-Zone Enterprise Datacenter\n! Hostname: CUSTOM-DATACENTER-ACCESS-SW01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CUSTOM-DATACENTER-ACCESS-SW01\nno ip domain-lookup\nservice password-encryption\n\n! --- VTP TRANSPARENT MODE ---\nvtp mode transparent\n\n! --- VLAN DEFINITIONS ---\nvlan 100\n name Kubernetes_Container_Workloads\n exit\nvlan 110\n name Database_High_Availability_Clust\n exit\nvlan 120\n name Public_Ingress_DMZ_Reverse_Proxi\n exit\nvlan 130\n name Out_Of_Band_Management_IPMI\n exit\nvlan 999\n name QUARANTINE_NATIVE_VLAN\n state suspend\n exit\n\n! --- RAPID SPANNING TREE ---\nspanning-tree mode rapid-pvst\n\n! --- HARDENED TRUNK TO CORE SWITCH ---\ninterface GigabitEthernet0/1\n description UPLINK-TO-CORE-DISTRIBUTION-SWITCH\n switchport trunk encapsulation dot1q\n switchport mode trunk\n switchport nonegotiate\n switchport trunk native vlan 999\n switchport trunk allowed vlan 100,110,120,130\n no shutdown\n exit\n\n! --- ACCESS EDGE PORTS (WITH PORTFAST & BPDU GUARD) ---\ninterface range FastEthernet0/1 - 24\n description ACCESS-ENDPOINTS-VLAN-100\n switchport mode access\n switchport access vlan 100\n spanning-tree portfast\n spanning-tree bpduguard enable\n no shutdown\n exit\n\nend\nwrite memory\n\n\n################################################################################\n\n! ===========================================================================\n! CISCO IOS CONFIGURATION: ENTERPRISE BORDER / CORE ROUTER\n! Scenario: Custom Dual-Zone Enterprise Datacenter\n! Hostname: CUSTOM-DATACENTER-BORDER-ROUTER01\n! Generated automatically by NetArchitect Recommendation Engine\n! ===========================================================================\nenable\nconfigure terminal\nhostname CUSTOM-DATACENTER-BORDER-ROUTER01\nno ip domain-lookup\nservice password-encryption\n\n! --- INTERFACE CONFIGURATION ---\ninterface GigabitEthernet0/0/0\n description LAN-INTERNAL-CORE-LINK\n ip address 192.168.0.254 255.255.255.0\n no shutdown\n exit\n\ninterface GigabitEthernet0/0/1\n description WAN-PUBLIC-UPLINK\n ip address 198.51.100.1 255.255.255.252\n no shutdown\n exit\n\n! --- HARDENED ROUTING ENGINE PROTOCOL ---\nrouter ospf 1\n router-id 192.168.0.1\n log-adjacency-changes\n network 192.168.0.0 0.0.7.255 area 0\n network 192.168.8.0 0.0.1.255 area 0\n network 192.168.10.0 0.0.0.127 area 0\n network 192.168.10.128 0.0.0.63 area 0\n exit\n\n! --- ENTERPRISE DEFENSE ACCESS CONTROL LISTS (ACLs) ---\nip access-list extended ACL-ISOLATE-IOT-AND-GUEST\n remark Permit established return sessions\n permit tcp any any established\n remark Permit internal DNS and DHCP\n permit udp any any eq domain\n permit udp any any eq bootps\n permit udp any any eq bootpc\n remark Deny guest and IoT access to internal corporate subnets (RFC 1918)\n deny ip 10.0.0.0 0.255.255.255 10.10.10.0 0.0.0.255\n deny ip 172.16.0.0 0.15.255.255 172.16.199.0 0.0.0.255\n permit ip any any\n exit\n\nend\nwrite memory\n\n\n################################################################################\n",
+  "executive_rationales": [
+    "Physical Media Strategy: Deployed Cat6a 10GBASE-T for horizontal runs <=100m (IEEE 802.3an), OM4 MMF 10GBASE-SR for intra-campus backbone runs <=400m (850nm dispersion limit), OS2 SMF 10GBASE-LR/ER for long-span inter-building and MAN runs (zero modal dispersion). All link selections strictly adhere to IEEE 802.3 attenuation and transceiver optical budgets.",
+    "Layer 2 Resiliency: Enforced IEEE 802.1w Rapid Spanning Tree Protocol (Rapid PVST+). Provides sub-second failure recovery (<1s) via edge port fast transitions and direct proposal-agreement handshakes, eliminating legacy 802.1D 30-50s listening/learning delays.",
+    "Subnetting & Addressing: Implemented descending bitwise VLSM allocation within 192.168.0.0/20. Allocated 4 non-overlapping subnets (2752 total addresses reserved, 1920 active hosts) achieving 69.8% address space efficiency. All wildcard masks derived via bitwise unsigned negation.",
+    "Routing Architecture: OSPF Area 0 (Single Backbone Area). Selected OSPF Area 0 because network scale (4 subnets, single Autonomous System) is well within the 50-subnet threshold for a single area. Eliminates ABR route summarization complexity while guaranteeing instant topological convergence via Dijkstra's Shortest Path First algorithm. (Reference: IETF RFC 2328 (OSPFv2))."
+  ]
+}
