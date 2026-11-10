@@ -5,12 +5,12 @@ Focus: IPsec VPN, Multi-Area OSPF/BGP, route summarization, edge isolation.
 """
 
 from netarchitect.models.scenario_inputs import (
-    ScenarioInput,
     LinkRequest,
-    SubnetRequest,
     MediumPreference,
-    SecurityZone,
     ResiliencyMode,
+    ScenarioInput,
+    SecurityZone,
+    SubnetRequest,
 )
 
 

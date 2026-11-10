@@ -4,20 +4,24 @@ Powered by Typer and Rich to deliver an exceptional terminal UX with
 color-coded tables, formatted syntax highlighting, and progress indicators.
 """
 
+import json
 from pathlib import Path
 from typing import Optional
-import json
+
 import typer
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
+from rich.table import Table
 from rich.text import Text
-from rich.syntax import Syntax
 
-from netarchitect.presets.preset_registry import PresetRegistry
-from netarchitect.network_planner import NetworkPlanner
+from netarchitect.exceptions import (
+    AddressSpaceExhaustionError,
+    NetArchitectError,
+    PhysicalDistanceViolationError,
+)
 from netarchitect.models.scenario_inputs import ScenarioInput
-from netarchitect.exceptions import NetArchitectError, PhysicalDistanceViolationError, AddressSpaceExhaustionError
+from netarchitect.network_planner import NetworkPlanner
+from netarchitect.presets.preset_registry import PresetRegistry
 
 app = typer.Typer(
     name="netarchitect",

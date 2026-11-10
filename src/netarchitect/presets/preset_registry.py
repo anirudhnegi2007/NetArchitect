@@ -4,6 +4,7 @@ Provides access and enumeration of the three preset profiles.
 """
 
 from typing import Dict, List, Optional
+
 from netarchitect.models.scenario_inputs import ScenarioInput
 from netarchitect.presets.profile1_campus_lan import get_campus_lan_scenario
 from netarchitect.presets.profile2_metro_man import get_metro_man_scenario

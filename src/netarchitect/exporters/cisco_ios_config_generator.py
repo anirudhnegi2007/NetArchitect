@@ -6,12 +6,15 @@ into copy-paste-ready Cisco IOS configurations for Cisco Packet Tracer, GNS3, an
 
 import ipaddress
 from typing import List
-from netarchitect.models.scenario_inputs import ScenarioInput, ResiliencyMode, SecurityZone
+
 from netarchitect.models.architecture_outputs import (
-    MediaRecommendation,
-    SubnetAllocation,
-    RoutingRecommendation,
     DeviceConfig,
+    MediaRecommendation,
+    RoutingRecommendation,
+    SubnetAllocation,
+)
+from netarchitect.models.scenario_inputs import (
+    ScenarioInput,
 )
 
 

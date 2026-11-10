@@ -5,12 +5,13 @@ IETF RFCs, and optical/electrical transmission physics.
 """
 
 from typing import List
-from netarchitect.models.scenario_inputs import ScenarioInput, ResiliencyMode
+
 from netarchitect.models.architecture_outputs import (
     MediaRecommendation,
-    SubnetAllocation,
     RoutingRecommendation,
+    SubnetAllocation,
 )
+from netarchitect.models.scenario_inputs import ResiliencyMode, ScenarioInput
 
 
 class ExplainabilityEngine:

@@ -4,10 +4,14 @@ Evaluates network scale, subnet density, autonomous system topology,
 and resiliency requirements to recommend OSPF Area 0, Multi-Area OSPF, or eBGP.
 """
 
-from typing import List
 import ipaddress
-from netarchitect.models.scenario_inputs import ScenarioInput, ResiliencyMode
-from netarchitect.models.architecture_outputs import RoutingRecommendation, SubnetAllocation
+from typing import List
+
+from netarchitect.models.architecture_outputs import (
+    RoutingRecommendation,
+    SubnetAllocation,
+)
+from netarchitect.models.scenario_inputs import ResiliencyMode, ScenarioInput
 
 
 class RoutingProtocolEngine:

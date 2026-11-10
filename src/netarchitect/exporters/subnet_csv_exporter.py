@@ -6,6 +6,7 @@ Exports allocated subnet tables to standard CSV format for NOC and spreadsheet i
 import csv
 from pathlib import Path
 from typing import List, Union
+
 from netarchitect.models.architecture_outputs import SubnetAllocation
 
 

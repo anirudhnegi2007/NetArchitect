@@ -7,13 +7,17 @@ Maps directly to Rubric Section 5 and ai_audit_log.md case studies:
 """
 
 import ipaddress
-import pytest
-from netarchitect.models.scenario_inputs import LinkRequest, MediumPreference, SubnetRequest
+
 from netarchitect.engines.physical_media_engine import L1L2MediaEngine
 from netarchitect.engines.vlsm_subnet_allocator import BitwiseVLSMAllocator
 from netarchitect.exporters.cisco_ios_config_generator import CiscoIOSConfigSynthesizer
-from netarchitect.presets.profile1_campus_lan import get_campus_lan_scenario
+from netarchitect.models.scenario_inputs import (
+    LinkRequest,
+    MediumPreference,
+    SubnetRequest,
+)
 from netarchitect.network_planner import NetworkPlanner
+from netarchitect.presets.profile1_campus_lan import get_campus_lan_scenario
 
 
 def test_ai_defense_case_1_canonical_network_alignment():

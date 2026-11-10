@@ -5,11 +5,13 @@ boundaries, descending sort packing, and strict non-overlap mathematical invaria
 """
 
 import ipaddress
+
 import pytest
-from netarchitect.models.scenario_inputs import SubnetRequest, SecurityZone
-from netarchitect.models.architecture_outputs import SubnetAllocation
+
 from netarchitect.engines.vlsm_subnet_allocator import BitwiseVLSMAllocator
 from netarchitect.exceptions import AddressSpaceExhaustionError, SubnetOverlapError
+from netarchitect.models.architecture_outputs import SubnetAllocation
+from netarchitect.models.scenario_inputs import SecurityZone, SubnetRequest
 
 
 @pytest.mark.parametrize(

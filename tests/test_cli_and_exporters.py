@@ -5,14 +5,14 @@ and Explainability Rationale Engine.
 
 import csv
 import json
+
 from typer.testing import CliRunner
 
 from netarchitect.cli import app as cli_app
-from netarchitect.presets.profile1_campus_lan import get_campus_lan_scenario
-from netarchitect.network_planner import NetworkPlanner
-from netarchitect.exporters.subnet_csv_exporter import CSVExporter
 from netarchitect.exporters.plan_json_exporter import JSONExporter
-
+from netarchitect.exporters.subnet_csv_exporter import CSVExporter
+from netarchitect.network_planner import NetworkPlanner
+from netarchitect.presets.profile1_campus_lan import get_campus_lan_scenario
 
 runner = CliRunner()
 

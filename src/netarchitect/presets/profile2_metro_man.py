@@ -5,12 +5,12 @@ Focus: OS2 SMF (10GBASE-LR/ER), EVPL, Sub-5ms QoS, dual-homed failover ring.
 """
 
 from netarchitect.models.scenario_inputs import (
-    ScenarioInput,
     LinkRequest,
-    SubnetRequest,
     MediumPreference,
-    SecurityZone,
     ResiliencyMode,
+    ScenarioInput,
+    SecurityZone,
+    SubnetRequest,
 )
 
 

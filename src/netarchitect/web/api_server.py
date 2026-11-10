@@ -5,17 +5,22 @@ and downloading Cisco IOS configurations.
 """
 
 from pathlib import Path
-from typing import List, Dict, Any
-from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, PlainTextResponse, FileResponse
-from fastapi.middleware.cors import CORSMiddleware
+from typing import Any, Dict, List
 
-from netarchitect.presets.preset_registry import PresetRegistry
-from netarchitect.network_planner import NetworkPlanner
-from netarchitect.models.scenario_inputs import ScenarioInput
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, PlainTextResponse
+from fastapi.staticfiles import StaticFiles
+
+from netarchitect.exceptions import (
+    AddressSpaceExhaustionError,
+    NetArchitectError,
+    PhysicalDistanceViolationError,
+)
 from netarchitect.models.architecture_outputs import PlanResult
-from netarchitect.exceptions import NetArchitectError, PhysicalDistanceViolationError, AddressSpaceExhaustionError
+from netarchitect.models.scenario_inputs import ScenarioInput
+from netarchitect.network_planner import NetworkPlanner
+from netarchitect.presets.preset_registry import PresetRegistry
 
 app = FastAPI(
     title="NetArchitect Recommendation & Config Engine",

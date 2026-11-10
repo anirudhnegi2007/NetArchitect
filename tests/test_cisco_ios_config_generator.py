@@ -5,9 +5,9 @@ eBGP blocks, and non-octet boundary interface IP assignment.
 """
 
 from netarchitect.models.scenario_inputs import ScenarioInput, SubnetRequest
+from netarchitect.network_planner import NetworkPlanner
 from netarchitect.presets.profile1_campus_lan import get_campus_lan_scenario
 from netarchitect.presets.profile3_global_wan import get_global_wan_scenario
-from netarchitect.network_planner import NetworkPlanner
 
 
 def test_core_switch_svi_and_ospf_network_statements():

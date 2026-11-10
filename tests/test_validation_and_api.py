@@ -3,21 +3,22 @@ End-to-end tests for Preset Profiles, Input Schema Validation, and FastAPI REST 
 """
 
 import ipaddress
-import pytest
-from pydantic import ValidationError
-from fastapi.testclient import TestClient
 
+import pytest
+from fastapi.testclient import TestClient
+from pydantic import ValidationError
+
+from netarchitect.exceptions import InvalidCIDRError
 from netarchitect.models.scenario_inputs import (
-    ScenarioInput,
     LinkRequest,
-    SubnetRequest,
     MediumPreference,
+    ScenarioInput,
     SecurityZone,
+    SubnetRequest,
 )
-from netarchitect.presets.preset_registry import PresetRegistry
 from netarchitect.network_planner import NetworkPlanner
+from netarchitect.presets.preset_registry import PresetRegistry
 from netarchitect.web.api_server import app
-from netarchitect.exceptions import InvalidCIDRError, ScenarioValidationError
 
 
 @pytest.mark.parametrize("preset_id", ["campus-lan", "metro-man", "global-wan"])

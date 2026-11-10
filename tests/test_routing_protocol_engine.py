@@ -3,12 +3,16 @@ Unit tests for Layer 3 Routing Protocol Decision Engine.
 Verifies OSPF Area 0, BFD convergence, Multi-Area OSPF, and eBGP selection logic.
 """
 
-from netarchitect.models.scenario_inputs import ScenarioInput, SubnetRequest, ResiliencyMode
+from netarchitect.engines.routing_protocol_engine import RoutingProtocolEngine
+from netarchitect.engines.vlsm_subnet_allocator import BitwiseVLSMAllocator
+from netarchitect.models.scenario_inputs import (
+    ResiliencyMode,
+    ScenarioInput,
+    SubnetRequest,
+)
 from netarchitect.presets.profile1_campus_lan import get_campus_lan_scenario
 from netarchitect.presets.profile2_metro_man import get_metro_man_scenario
 from netarchitect.presets.profile3_global_wan import get_global_wan_scenario
-from netarchitect.engines.vlsm_subnet_allocator import BitwiseVLSMAllocator
-from netarchitect.engines.routing_protocol_engine import RoutingProtocolEngine
 
 
 def test_campus_lan_selects_ospf_area_0():

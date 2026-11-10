@@ -3,8 +3,9 @@ Structured JSON Exporter for NetArchitect.
 Serializes recommendation plans, subnet mappings, and rationale trees into JSON.
 """
 
-from typing import Union
 from pathlib import Path
+from typing import Union
+
 from netarchitect.models.architecture_outputs import PlanResult
 
 

@@ -5,9 +5,10 @@ and modal dispersion limits.
 """
 
 from typing import List
-from netarchitect.models.scenario_inputs import LinkRequest, MediumPreference
-from netarchitect.models.architecture_outputs import MediaRecommendation
+
 from netarchitect.exceptions import PhysicalDistanceViolationError
+from netarchitect.models.architecture_outputs import MediaRecommendation
+from netarchitect.models.scenario_inputs import LinkRequest, MediumPreference
 
 
 class L1L2MediaEngine:

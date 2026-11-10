@@ -4,12 +4,13 @@ Implements pure unsigned 32-bit arithmetic, strictly non-overlapping prefix tree
 canonical network alignment, and deterministic address exhaustion validation.
 """
 
-import math
 import ipaddress
+import math
 from typing import List, Tuple
-from netarchitect.models.scenario_inputs import SubnetRequest
-from netarchitect.models.architecture_outputs import SubnetAllocation
+
 from netarchitect.exceptions import AddressSpaceExhaustionError, SubnetOverlapError
+from netarchitect.models.architecture_outputs import SubnetAllocation
+from netarchitect.models.scenario_inputs import SubnetRequest
 
 
 class BitwiseVLSMAllocator:

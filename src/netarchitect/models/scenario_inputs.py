@@ -3,10 +3,12 @@ Input Data Contracts & Schemas (Pydantic v2).
 Ensures end-to-end type safety, validation boundaries, and serialization per Ponytail.
 """
 
+import ipaddress
 from enum import Enum
 from typing import List, Optional
-import ipaddress
+
 from pydantic import BaseModel, Field, field_validator, model_validator
+
 from netarchitect.exceptions import InvalidCIDRError, ScenarioValidationError
 
 

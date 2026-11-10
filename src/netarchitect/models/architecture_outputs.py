@@ -4,8 +4,10 @@ Defines strongly-typed output models for recommendation reports, subnet plans,
 and Cisco IOS configuration bundles.
 """
 
-from typing import List, Optional
+from typing import List
+
 from pydantic import BaseModel, Field
+
 from netarchitect.models.scenario_inputs import SecurityZone
 
 

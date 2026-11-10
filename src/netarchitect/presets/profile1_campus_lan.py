@@ -5,12 +5,12 @@ Focus: Cat6a vs OM4 MMF, 802.1Q VLANs, Rapid-PVST (RSTP), Single-Area OSPF Area 
 """
 
 from netarchitect.models.scenario_inputs import (
-    ScenarioInput,
     LinkRequest,
-    SubnetRequest,
     MediumPreference,
-    SecurityZone,
     ResiliencyMode,
+    ScenarioInput,
+    SecurityZone,
+    SubnetRequest,
 )
 
 

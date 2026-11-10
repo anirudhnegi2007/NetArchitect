@@ -5,9 +5,10 @@ Verifies IEEE 802.3an/ae standards, exact boundary thresholds, and PhysicalDista
 
 import pytest
 from pydantic import ValidationError
-from netarchitect.models.scenario_inputs import LinkRequest, MediumPreference
+
 from netarchitect.engines.physical_media_engine import L1L2MediaEngine
 from netarchitect.exceptions import PhysicalDistanceViolationError
+from netarchitect.models.scenario_inputs import LinkRequest, MediumPreference
 
 
 def test_copper_cat6a_valid_within_100m():

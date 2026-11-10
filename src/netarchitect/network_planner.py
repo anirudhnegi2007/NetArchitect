@@ -6,17 +6,17 @@ routing protocol selection, explainable rationale synthesis, and Cisco IOS code 
 
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional, Union
+from typing import Union
 
-from netarchitect.models.scenario_inputs import ScenarioInput
-from netarchitect.models.architecture_outputs import PlanResult
-from netarchitect.engines.physical_media_engine import L1L2MediaEngine
-from netarchitect.engines.vlsm_subnet_allocator import BitwiseVLSMAllocator
-from netarchitect.engines.routing_protocol_engine import RoutingProtocolEngine
 from netarchitect.engines.architectural_rationale_engine import ExplainabilityEngine
+from netarchitect.engines.physical_media_engine import L1L2MediaEngine
+from netarchitect.engines.routing_protocol_engine import RoutingProtocolEngine
+from netarchitect.engines.vlsm_subnet_allocator import BitwiseVLSMAllocator
 from netarchitect.exporters.cisco_ios_config_generator import CiscoIOSConfigSynthesizer
 from netarchitect.exporters.plan_json_exporter import JSONExporter
 from netarchitect.exporters.subnet_csv_exporter import CSVExporter
+from netarchitect.models.architecture_outputs import PlanResult
+from netarchitect.models.scenario_inputs import ScenarioInput
 
 
 class NetworkPlanner:
